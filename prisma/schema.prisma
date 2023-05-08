@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Gardener {
+  id         String     @id @default(uuid()) @map("_id")
+  name       String
+  surname    String
+  services   Service @relation(fields: [id], references: [id])
+  points     Int
+  location   Location?
+  profilePic String?
+  reviews    Review[]
+  appointments Appointment[]
+  appointmentId String @unique
+}
+
+
+model Service {
+  id     String   @id @default(uuid()) @map("_id")
+  name   String
+  price  Float
+  gardeners Gardener[]
+}
+
+model Location {
+  id         String    @id @default(uuid()) @map("_id")
+  latitude   String
+  longitude  String
+  address    String
+  gardener   Gardener  @relation(fields: [gardenerId], references: [id])
+  gardenerId String    @unique
+}
+
+model Appointment {
+  id             String      @id @default(uuid()) @map("_id")
+  date           DateTime
+  status         String
+  review         Review?     @relation(fields: [reviewId], references: [id])
+  reviewId       String @unique
+  gardener       Gardener    @relation(fields: [gardenerId], references: [id])
+  gardenerId     String
+  user           User        @relation(fields: [userId], references: [id])
+  userId         String
+
+}
+
+model Review {
+  id             String      @id @default(uuid()) @map("_id")
+  comment        String
+  rating         Float
+  gardener       Gardener    @relation(fields: [gardenerId], references: [id])
+  gardenerId     String
+  appointment    Appointment? 
+  appointmentId  String 
+}
+
+
+model User {
+  id           String        @id @default(uuid()) @map("_id")
+  name         String
+  surname      String
+  email        String        @unique
+  appointments Appointment[]
+}
+
+
+
+
