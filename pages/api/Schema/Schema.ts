@@ -14,13 +14,9 @@ export const typeDefs = gql`
         reviews: [Review!]!
         user(id: String!): User
         users: [User!]!
+        currentUser: User
     }
     type Mutation {
-        createGardener(input: GardenerInput!): Gardener!
-        createService(input: ServiceInput!): Service!
-        createLocation(input: LocationInput!): Location!
-        updateLocation(id: String!, input: LocationInput!): Location!
-        deleteLocation(id: String!): Location!
         createAppointment(input: AppointmentInput!): Appointment!
         updateAppointment(id: String!, input: AppointmentInput!): Appointment!
         deleteAppointment(id: String!): Appointment!
@@ -30,6 +26,8 @@ export const typeDefs = gql`
         createUser(input: UserInput!): User!
         updateUser(id: String!, input: UserInput!): User!
         deleteUser(id: String!): User!
+        register(input: RegisterInput!): User!
+        login(input: LoginInput!): AuthPayload!
     }
     type Gardener {
         id: String!
@@ -41,12 +39,11 @@ export const typeDefs = gql`
         profilePic: String
         reviews: [Review]
         appointments: [Appointment]
-        appointmentId: String
     }
 
     type Service {
         id: String!
-        name: String!
+        name: ServiceName!
         price: Float!
         gardeners: [Gardener!]!
     }
@@ -56,19 +53,15 @@ export const typeDefs = gql`
         longitude: String!
         address: String!
         gardener: Gardener
-        gardenerId: String
     }
 
     type Appointment {
         id: String!
         date: String!
-        status: String!
+        status: Status!
         review: Review
-        reviewId: String
         gardener: Gardener!
-        gardenerId: String!
         user: User!
-        userId: String!
     }
 
     type Review {
@@ -76,9 +69,7 @@ export const typeDefs = gql`
         comment: String!
         rating: Float!
         gardener: Gardener!
-        gardenerId: String!
         appointment: Appointment
-        appointmentId: String
     }
 
     type User {
@@ -89,35 +80,38 @@ export const typeDefs = gql`
         appointments: [Appointment!]!
     }
 
-    input GardenerInput {
-        name: String!
-        surname: String!
-        services: [ServiceInput]
-        points: Int!
-        location: LocationInput
-        profilePic: String
-        reviews: [ReviewInput]
-        appointments: [AppointmentInput]
+    type AuthPayload {
+        user: User!
+        accessToken: String!
+        expiresIn: Int!
     }
 
-    input ServiceInput {
-        name: String!
-        price: Float!
-        gardeners: [GardenerInput!]
+    enum ServiceName {
+        MOWING
+        WEEDCONTROL
+        DESIGN
+        PESTCONTROL
+        MULCHING
+        TRIMMING
+        FERTILIZING
+        LEAFREMOVAL
+        MAINTENANCE
+        LANDSCAPING
+        PLANTING
+        PRUNING
     }
-
-    input LocationInput {
-        latitude: String!
-        longitude: String!
-        address: String!
+    enum Status {
+        DONE
+        ONGOING
+        SCHEDULED
     }
 
     input AppointmentInput {
         date: String!
         status: String!
-        reviewId: String
         gardenerId: String!
         userId: String!
+        review: ReviewInput
     }
 
     input ReviewInput {
@@ -131,5 +125,17 @@ export const typeDefs = gql`
         name: String!
         surname: String!
         email: String!
+    }
+
+    input RegisterInput {
+        name: String!
+        surname: String!
+        email: String!
+        password: String!
+    }
+
+    input LoginInput {
+        email: String!
+        password: String!
     }
 `;
