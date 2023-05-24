@@ -12,7 +12,7 @@ export const typeDefs = gql`
         appointments: [Appointment!]!
         review(id: String!): Review
         reviews: [Review!]!
-        user(id: String!): User
+        user(id: ID!): User
         users: [User!]!
         currentUser: User
     }
@@ -26,8 +26,9 @@ export const typeDefs = gql`
         createUser(input: UserInput!): User!
         updateUser(id: String!, input: UserInput!): User!
         deleteUser(id: String!): User!
-        register(input: RegisterInput!): User!
+        signup(input: RegisterInput!): User!
         login(input: LoginInput!): AuthPayload!
+        logout: Boolean!
     }
     type Gardener {
         id: String!
@@ -108,16 +109,16 @@ export const typeDefs = gql`
 
     input AppointmentInput {
         date: String!
-        status: String!
+        status: Status!
         gardenerId: String!
-        userId: String!
+        userId: ID!
         review: ReviewInput
     }
 
     input ReviewInput {
         comment: String!
         rating: Float!
-        gardenerId: String!
+        gardenerId: ID!
         appointmentId: String
     }
 

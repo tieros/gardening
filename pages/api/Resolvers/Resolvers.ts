@@ -1,13 +1,33 @@
 import { ServiceName } from '@prisma/client';
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
-const supabase = createClient(
+export const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_KEY!,
 );
+
+const handleLogin = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+    });
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    const currentUser = await prisma.user.findUnique({
+        where: { id: data?.user?.id },
+    });
+    return {
+        accessToken: data?.session?.access_token,
+        expiresIn: data?.session?.expires_in,
+        user: currentUser,
+    };
+};
 
 export const resolvers = {
     Query: {
@@ -16,9 +36,11 @@ export const resolvers = {
         service: (_, { servicename }: ServiceName) =>
             prisma.service.findUnique({ where: { servicename } }),
         services: () => prisma.service.findMany(),
-        location: (_, { address }) => prisma.location.findUnique({ where: { address } }),
+        location: (_, { address }) =>
+            prisma.location.findUnique({ where: { address } }),
         locations: () => prisma.location.findMany(),
-        appointment: (_, { id }) => prisma.appointment.findUnique({ where: { id } }),
+        appointment: (_, { id }) =>
+            prisma.appointment.findUnique({ where: { id } }),
         appointments: () => prisma.appointment.findMany(),
         review: (_, { id }) => prisma.review.findUnique({ where: { id } }),
         reviews: () => prisma.review.findMany(),
@@ -26,16 +48,21 @@ export const resolvers = {
         users: () => prisma.user.findMany(),
     },
     Mutation: {
-        createAppointment: (_, args) => prisma.appointment.create({ data: args.data }),
-        updateAppointment: (_, { id, data }) => prisma.appointment.update({ where: { id }, data }),
-        deleteAppointment: (_, { id }) => prisma.appointment.delete({ where: { id } }),
+        createAppointment: (_, args) =>
+            prisma.appointment.create({ data: args.data }),
+        updateAppointment: (_, { id, data }) =>
+            prisma.appointment.update({ where: { id }, data }),
+        deleteAppointment: (_, { id }) =>
+            prisma.appointment.delete({ where: { id } }),
         createReview: (_, args) => prisma.review.create({ data: args.data }),
-        updateReview: (_, { id, data }) => prisma.review.update({ where: { id }, data }),
+        updateReview: (_, { id, data }) =>
+            prisma.review.update({ where: { id }, data }),
         deleteReview: (_, { id }) => prisma.review.delete({ where: { id } }),
         createUser: (_, args) => prisma.user.create({ data: args.data }),
-        updateUser: (_, { id, data }) => prisma.user.update({ where: { id }, data }),
+        updateUser: (_, { id, data }) =>
+            prisma.user.update({ where: { id }, data }),
         deleteUser: (_, { id }) => prisma.user.delete({ where: { id } }),
-        register: async (_, { input }) => {
+        signup: async (_, { input }) => {
             const { data, error } = await supabase.auth.signUp({
                 email: input.email,
                 password: input.password,
@@ -54,31 +81,32 @@ export const resolvers = {
                     surname: input.surname,
                 },
             });
+            const loginData = await handleLogin(input.email, input.password);
 
-            return createdUser; // Return the created user
+            return loginData;
         },
         login: async (_, { input }) => {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: input.email,
-                password: input.password,
-            });
-
-            if (error) {
-                throw new Error(error.message);
+            const loginData = await handleLogin(input.email, input.password);
+            return loginData;
+        },
+        logout: async () => {
+            const { error } = await supabase.auth.signOut();
+            if (!error) {
+                return true;
             }
-          const currentUser = prisma.user.findUnique({where: {id: data?.user?.id}})
-          return {
-            accessToken: data?.session?.access_token,
-            expiresIn: data?.session?.expires_in,
-            user: currentUser
-          }
+            return false;
         },
     },
     Gardener: {
-        services: (parent) => prisma.gardener.findUnique({ where: { id: parent.id } }).services(),
-        location: (parent) => prisma.gardener.findUnique({ where: { id: parent.id } }).location(),
-        reviews: (parent) => prisma.gardener.findUnique({ where: { id: parent.id } }).reviews(),
+        services: (parent) =>
+            prisma.gardener.findUnique({ where: { id: parent.id } }).services(),
+        location: (parent) =>
+            prisma.gardener.findUnique({ where: { id: parent.id } }).location(),
+        reviews: (parent) =>
+            prisma.gardener.findUnique({ where: { id: parent.id } }).reviews(),
         appointments: (parent) =>
-            prisma.gardener.findUnique({ where: { id: parent.id } }).appointments(),
+            prisma.gardener
+                .findUnique({ where: { id: parent.id } })
+                .appointments(),
     },
 };
