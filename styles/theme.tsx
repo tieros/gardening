@@ -30,5 +30,3 @@ export const ThemeProvider = ({ children }: { children?: ReactNode }) => (
         {children}
     </StyledThemeProvider>
 );
-
-export default ThemeProvider;

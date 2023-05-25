@@ -1,16 +1,13 @@
 import styled, { css } from 'styled-components';
 
 type Props = {
-    onClick: () => void;
+    onClick?: () => void;
     size?: 'small' | 'default';
-    mode?: 'accent' | 'white' | 'danger' | 'green';
+    mode?: 'primary' | 'secondary' | 'white' | 'danger';
     children: React.ReactNode;
 };
 
-const StyledButton = styled.button<{
-    size: 'small' | 'default';
-    mode: 'accent' | 'white' | 'danger' | 'green';
-}>`
+const StyledButton = styled.button<Props>`
     ${({ theme, size, mode }) => css`
         width: ${size === 'default' ? '300px' : '155px'};
         height: ${size === 'default' ? '58px' : '45px'};
@@ -22,12 +19,12 @@ const StyledButton = styled.button<{
 
         ${() => {
             switch (mode) {
-                case 'accent':
+                case 'primary':
                     return css`
                         color: ${theme.colors.dark};
-                        background-color: ${theme.colors.accent};
+                        background-color: ${theme.colors.peachLinear};
                     `;
-                case 'green':
+                case 'secondary':
                     return css`
                         color: ${theme.colors.dark};
                         background-color: ${theme.colors.green};
@@ -43,17 +40,20 @@ const StyledButton = styled.button<{
                         color: ${theme.colors.background};
                         background-color: ${theme.colors.danger};
                     `;
+                default:
+                    return null;
             }
         }};
     `}
 `;
+
 const Button = ({
     onClick,
     size = 'default',
-    mode = 'accent',
+    mode = 'primary',
     children,
 }: Props) => (
-    <StyledButton size={size} mode={mode} onClick={() => onClick()}>
+    <StyledButton size={size} mode={mode} onClick={onClick}>
         {children}
     </StyledButton>
 );
