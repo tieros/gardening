@@ -16,6 +16,7 @@ export const customtheme = {
     },
     boxShadows: {
         navbar: '-20px -20px 20px rgba(255, 255, 255, 0.38), 20px 20px 20px rgba(224, 224, 215, 0.45);',
+        mobileNavbar: 'inset 0px -2px 0px #ebefe6, inset 0px 2px 3px #dbddcb',
         input: 'inset 8px 8px 8px rgba(0, 0, 0, 0.09), inset -8px -8px 8px #F7F7F0;',
         inputError: 'inset 2px 4px 8px #DC575C, inset -8px -8px 8px #F7F7F0;',
         button: '0px 130px 52px rgba(80, 43, 43, 0.01), 0px 73px 44px rgba(80, 43, 43, 0.05), 0px 32px 32px rgba(80, 43, 43, 0.09), 0px 8px 18px rgba(80, 43, 43, 0.1), 0px 0px 0px rgba(80, 43, 43, 0.1);',
