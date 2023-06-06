@@ -1,17 +1,28 @@
 'use client';
 import Button from '@/components/UI/Button';
 import styled from 'styled-components';
-import Text from '@/components/UI/Text';
-import Navbar from '@/components/landing-page/Navbar';
+import Navbar from '@/components/UI/Navbar';
+import Container from '@/components/UI/Container';
+import Image from 'next/image';
+import HeroImage from '../src/assets/heroImage.png';
+import HowItWorks from '@/components/landing-page/HowItWorks';
+import Hero from '@/components/landing-page/Hero';
 
-const Header = styled.span`
-    background-color: ${({ theme }) => theme.colors.green};
-`;
+const navElements = [
+    { label: 'How It Works', link: '#howitworks' },
+    { label: 'Services', link: '#services' },
+    { label: 'Testimonials', link: '#testimonials' },
+    { label: 'Login', link: '/login' },
+];
+
 const LandingPage = () => (
-    <div className='p-10'>
-        <h1>Landing Page</h1>
-        <Navbar isAuthenticated={true} />
-        <Navbar isAuthenticated={false} />
-    </div>
+    <Container>
+        <Navbar navElements={navElements} />
+        <Hero />
+        <HowItWorks />
+        <div className='mt-[90vh]'>
+            <h2>TO BE CONTINUE</h2>
+        </div>
+    </Container>
 );
 export default LandingPage;

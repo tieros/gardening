@@ -2,18 +2,14 @@ import styled, { css } from 'styled-components';
 
 type Props = {
     onClick?: () => void;
-    size?: 'small' | 'default';
     mode?: 'primary' | 'secondary' | 'white' | 'danger';
     children: React.ReactNode;
 };
 
 const StyledButton = styled.button<Props>`
-    ${({ theme, size, mode }) => css`
-        width: ${size === 'default' ? '300px' : '155px'};
-        height: ${size === 'default' ? '58px' : '45px'};
-        font-size: ${size === 'default' ? '20px' : '16px'};
+    ${({ theme, mode }) => css`
         border-radius: 30px;
-        padding: 10px 32px;
+        padding: 10px 20px;
         box-shadow: ${theme.boxShadows.button};
         font-weight: 500;
 
@@ -22,7 +18,7 @@ const StyledButton = styled.button<Props>`
                 case 'primary':
                     return css`
                         color: ${theme.colors.dark};
-                        background-color: ${theme.colors.peachLinear};
+                        background-color: ${theme.colors.pink};
                     `;
                 case 'secondary':
                     return css`
@@ -47,13 +43,12 @@ const StyledButton = styled.button<Props>`
     `}
 `;
 
-const Button = ({
-    onClick,
-    size = 'default',
-    mode = 'primary',
-    children,
-}: Props) => (
-    <StyledButton size={size} mode={mode} onClick={onClick}>
+const Button = ({ onClick, mode = 'primary', children }: Props) => (
+    <StyledButton
+        mode={mode}
+        onClick={onClick}
+        className='w-[155px] md:w-[300px] h-[45px] md:h-[58px] text-base md:text-lg'
+    >
         {children}
     </StyledButton>
 );

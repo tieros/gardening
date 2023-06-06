@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
-    background-color: ${({ theme }) => theme.colors.background};
-    box-shadow: ${({ theme }) => theme.boxShadows.container};
     border-radius: 30px;
 `;
 
 const Container = ({ children }: React.PropsWithChildren) => (
-    <StyledContainer>{children}</StyledContainer>
+    <StyledContainer className='shadow-none md:shadow-container md:p-5 bg-background relative lg:m-5 xm:overflow-hidden'>
+        {children}
+    </StyledContainer>
 );
 
 export default Container;

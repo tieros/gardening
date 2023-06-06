@@ -21,5 +21,7 @@ export const customtheme = {
         button: '0px 130px 52px rgba(80, 43, 43, 0.01), 0px 73px 44px rgba(80, 43, 43, 0.05), 0px 32px 32px rgba(80, 43, 43, 0.09), 0px 8px 18px rgba(80, 43, 43, 0.1), 0px 0px 0px rgba(80, 43, 43, 0.1);',
         container:
             '-129px 0px 52px rgba(0, 0, 0, 0.01), -73px 0px 44px rgba(0, 0, 0, 0.05), -32px 0px 32px rgba(0, 0, 0, 0.09), -8px 0px 18px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)',
+        howItWorksCard:
+            '0px 4px 4px rgba(0, 0, 0, 0.25), inset -2px -2px 4px rgba(0, 0, 0, 0.25);',
     },
 };
