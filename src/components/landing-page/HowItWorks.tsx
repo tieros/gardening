@@ -17,6 +17,7 @@ const StyledGlassLayer = styled.div`
     width: 100%;
     height: 100%;
     text-align: center;
+    background: rgba(233, 235, 221, 0.17);
 `;
 
 const slides = [
@@ -47,7 +48,7 @@ const HowItWorks = () => (
         <div className='hidden lg:inline-block w-[97vw] h-[90vh] absolute left-0'>
             <Carousel
                 slides={slides}
-                className='w-[700px] lg:w-[920px] h-[400px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+                className='w-[700px] lg:w-[920px] h-[400px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background border border-[#fcfcfc]'
             />
             <div className='flex w-[97vw] h-[90vh] absolute top-0'>
                 <StyledGreenColumn className='shadow-howItWorksCard basis-1/2 bg-green rounded-[0px 30px 30px 0px]'>
@@ -58,13 +59,13 @@ const HowItWorks = () => (
                 <div className='basis-1/2'></div>
             </div>
         </div>
-        <div className='lg:hidden w-[100vw] h-[90vh] md:h-[640px] max-h-[640px]'>
+        <div className='lg:hidden w-[100vw] h-[90vh] md:h-[640px] max-h-[640px] relative'>
             <StyledGreenColumn className='h-full'>
                 <StyledGlassLayer className='p-5'>
                     <h2 className='text-background m-3'>How It Works</h2>
                     <Carousel
                         slides={slides}
-                        className='w-[350px] h-[450px] md:-h-[500px] md:w-[80vw] top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-2/3'
+                        className='w-[350px] h-[450px] md:-h-[500px] md:w-[80vw] top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-2/3 bg-background border border-[#fcfcfc]'
                     />
                 </StyledGlassLayer>
             </StyledGreenColumn>

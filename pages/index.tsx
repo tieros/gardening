@@ -1,13 +1,13 @@
 'use client';
-import Button from '@/components/UI/Button';
-import styled from 'styled-components';
+
 import Navbar from '@/components/UI/Navbar';
 import Container from '@/components/UI/Container';
-import Image from 'next/image';
-import HeroImage from '../src/assets/heroImage.png';
-import HowItWorks from '@/components/landing-page/HowItWorks';
-import Hero from '@/components/landing-page/Hero';
 
+import Hero from '@/components/landing-page/Hero';
+import HowItWorks from '@/components/landing-page/HowItWorks';
+import Services from '@/components/landing-page/Services';
+import Testimonials from '@/components/landing-page/Testimonials';
+import Footer from '@/components/landing-page/Footer';
 const navElements = [
     { label: 'How It Works', link: '#howitworks' },
     { label: 'Services', link: '#services' },
@@ -20,9 +20,9 @@ const LandingPage = () => (
         <Navbar navElements={navElements} />
         <Hero />
         <HowItWorks />
-        <div className='mt-[90vh]'>
-            <h2>TO BE CONTINUE</h2>
-        </div>
+        <Services />
+        <Testimonials />
+        <Footer />
     </Container>
 );
 export default LandingPage;

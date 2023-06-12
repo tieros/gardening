@@ -7,9 +7,7 @@ import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 
 const StyledSwiper = styled(Swiper)`
     position: absolute;
-    background-color: ${({ theme }) => theme.colors.background};
     border-radius: 30px;
-    border: 1px solid #fcfcfc;
     box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.25),
         inset 2px 2px 4px rgba(0, 0, 0, 0.25);
 

@@ -5,7 +5,7 @@ const StyledContainer = styled.div`
 `;
 
 const Container = ({ children }: React.PropsWithChildren) => (
-    <StyledContainer className='shadow-none md:shadow-container md:p-5 bg-background relative lg:m-5 xm:overflow-hidden'>
+    <StyledContainer className='relative shadow-none md:shadow-container bg-background lg:m-5 xm:overflow-hidden'>
         {children}
     </StyledContainer>
 );

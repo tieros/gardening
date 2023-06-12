@@ -30,7 +30,7 @@ const Hero = () => {
             <Image
                 src={HeroImage}
                 alt='green-leaf-image'
-                className='absolute xl:right-0 md:right-[-15%] scale-x-[-1] top-0 md:top-[10%] lg:top-[15%] rotate-[40deg] xl:rotate-0 right-[-40%] z-0'
+                className='absolute xl:right-0 md:right-[-15%] scale-x-[-1] top-0 md:top-[5%] rotate-[40deg] xl:rotate-0 right-[-40%] z-0'
             />
         </>
     );

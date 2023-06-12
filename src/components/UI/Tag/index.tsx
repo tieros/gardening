@@ -13,7 +13,7 @@ const StyledTag = styled.div<Omit<Props, 'label'>>`
             : theme.colors.lightGreen};
         text-align: center;
         border: ${mode === 'light' ? '1px solid #E9EBDD' : 'none'};
-        color: ${theme.colors.lightText};
+        color: ${theme.colors.dark};
         width: fit-content;
         display: flex;
         align-items: center;

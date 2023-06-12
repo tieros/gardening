@@ -7,14 +7,12 @@ export type Props = {
     value: string;
     error?: boolean;
     errorMessage?: React.ReactNode;
-    mobile?: boolean;
     label?: React.ReactNode;
 };
 
 const StyledInput = styled.input<Props>`
     box-shadow: ${({ theme, error }) =>
         error ? theme.boxShadows.inputError : theme.boxShadows.input};
-    width: ${({ mobile }) => (mobile ? '300px' : '357px')};
     height: 54px;
     border-radius: 30px;
     background-color: ${({ theme }) => theme.colors.background};
@@ -26,7 +24,6 @@ const Input = ({
     error,
     onBlur,
     errorMessage,
-    mobile = false,
     label,
 }: Props) => (
     <>
@@ -36,7 +33,7 @@ const Input = ({
             onChange={onChange}
             onBlur={onBlur}
             error={error}
-            mobile={mobile}
+            className='w-[300px] md:-w[357px]'
         />
         {error && errorMessage && (
             <span className='text-danger pt-1.5 pl-6'>{errorMessage}</span>
