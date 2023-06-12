@@ -10,7 +10,7 @@ const StyledServicesWrapper = styled.div`
 `;
 
 const Services = () => (
-    <StyledServicesWrapper className='mt-[6vh] lg:mt-[120vh]'>
+    <StyledServicesWrapper className='my-20'>
         <h2 className='text-dark'>Top Services</h2>
         <p className='text-xl lg:text-3xl max-w-[800px] text-center'>
             Here some of our most requested services, but not limited to...
