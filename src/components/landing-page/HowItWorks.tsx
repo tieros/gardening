@@ -44,33 +44,19 @@ const slides = [
 ];
 
 const HowItWorks = () => (
-    <>
-        <div className='hidden lg:inline-block w-[97vw] h-[90vh] absolute left-0'>
+    <StyledGreenColumn className='w-full lg:w-[50%] h-[80vh] lg:h-[70vh] lg:relative'>
+        <StyledGlassLayer className='flex flex-col gap-5 p-5 lg:p-10'>
+            <h2>How It Works</h2>
             <Carousel
                 slides={slides}
-                className='w-[700px] lg:w-[920px] h-[400px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background border border-[#fcfcfc]'
+                className='lg:!hidden w-[90vw] h-[60vh] bg-background m-auto'
             />
-            <div className='flex w-[97vw] h-[90vh] absolute top-0'>
-                <StyledGreenColumn className='shadow-howItWorksCard basis-1/2 bg-green rounded-[0px 30px 30px 0px]'>
-                    <StyledGlassLayer className='p-10 rounded-[0px 30px 30px 0px] flex justify-center'>
-                        <h2 className='text-background'>How It Works</h2>
-                    </StyledGlassLayer>
-                </StyledGreenColumn>
-                <div className='basis-1/2'></div>
-            </div>
-        </div>
-        <div className='lg:hidden w-[100vw] h-[90vh] md:h-[640px] max-h-[640px] relative'>
-            <StyledGreenColumn className='h-full'>
-                <StyledGlassLayer className='p-5'>
-                    <h2 className='text-background m-3'>How It Works</h2>
-                    <Carousel
-                        slides={slides}
-                        className='w-[350px] h-[450px] md:-h-[500px] md:w-[80vw] top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-2/3 bg-background border border-[#fcfcfc]'
-                    />
-                </StyledGlassLayer>
-            </StyledGreenColumn>
-        </div>
-    </>
+            <Carousel
+                slides={slides}
+                className='!hidden lg:!block w-[60vw] h-[40vh] absolute top-[50%] left-[50%] translate-x-0 -translate-y-[60%] bg-background'
+            />
+        </StyledGlassLayer>
+    </StyledGreenColumn>
 );
 
 export default HowItWorks;

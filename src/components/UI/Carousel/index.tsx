@@ -6,7 +6,6 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 
 const StyledSwiper = styled(Swiper)`
-    position: absolute;
     border-radius: 30px;
     box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.25),
         inset 2px 2px 4px rgba(0, 0, 0, 0.25);
@@ -44,7 +43,7 @@ const Carousel = ({ slides, className }: Props) => (
         mousewheel={true}
         keyboard={true}
         modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className={` absolute ${className}`}
+        className={`${className}`}
     >
         {slides.map((slide, index) => (
             <SwiperSlide key={index}>{slide}</SwiperSlide>
