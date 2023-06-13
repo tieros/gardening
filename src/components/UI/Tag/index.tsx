@@ -40,6 +40,13 @@ const StyledTag = styled.div<Omit<Props, 'label'>>`
                         height: 70px;
                         padding: 20px 30px;
                         font-size: 32px;
+
+                        @media (max-width: 768px) {
+                            border-radius: 10px;
+                            height: 50px;
+                            padding: 5px 12px;
+                            font-size: 16px;
+                        }
                     `;
             }
         }};

@@ -8,7 +8,7 @@ import HowItWorks from '@/components/landing-page/HowItWorks';
 import Services from '@/components/landing-page/Services';
 import Testimonials from '@/components/landing-page/Testimonials';
 import Footer from '@/components/landing-page/Footer';
-const navElements = [
+export const navElements = [
     { label: 'How It Works', link: '#howitworks' },
     { label: 'Services', link: '#services' },
     { label: 'Testimonials', link: '#testimonials' },

@@ -12,6 +12,7 @@ const StyledGreenColumn = styled.div`
 `;
 
 const StyledGlassLayer = styled.div`
+    border-radius: 16px;
     box-shadow: ${({ theme }) => theme.boxShadows.howItWorksCard};
     backdrop-filter: blur(55px);
     width: 100%;
@@ -44,16 +45,16 @@ const slides = [
 ];
 
 const HowItWorks = () => (
-    <StyledGreenColumn className='w-full lg:w-[50%] h-[80vh] lg:h-[70vh] lg:relative'>
-        <StyledGlassLayer className='flex flex-col gap-5 p-5 lg:p-10'>
-            <h2>How It Works</h2>
+    <StyledGreenColumn className='w-full lg:w-[50%] h-[80vh] md:h-[60vh] lg:h-[80vh] lg:relative'>
+        <StyledGlassLayer className='flex flex-col gap-8 p-5 md:p-10'>
+            <h2 className='text-background'>How It Works</h2>
             <Carousel
                 slides={slides}
-                className='lg:!hidden w-[90vw] h-[60vh] bg-background m-auto'
+                className='lg:!hidden w-[90vw] h-full bg-background m-auto rounded-[30px]'
             />
             <Carousel
                 slides={slides}
-                className='!hidden lg:!block w-[60vw] h-[40vh] absolute top-[50%] left-[50%] translate-x-0 -translate-y-[60%] bg-background'
+                className='!hidden lg:!block w-[60vw] h-full absolute top-[50%] left-[50%] translate-x-0 -translate-y-[60%] bg-background rounded-[30px]'
             />
         </StyledGlassLayer>
     </StyledGreenColumn>

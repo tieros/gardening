@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 export type Props = {
@@ -25,19 +25,25 @@ const Input = ({
     onBlur,
     errorMessage,
     label,
-}: Props) => (
-    <>
-        {label && label}
-        <StyledInput
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            error={error}
-            className='w-[300px] md:-w[357px]'
-        />
-        {error && errorMessage && (
-            <span className='text-danger pt-1.5 pl-6'>{errorMessage}</span>
-        )}
-    </>
-);
+}: Props) => {
+    const [isTouched, setIsTouched] = useState(false);
+    return (
+        <div className='flex flex-col max-w-[357px]'>
+            {label && label}
+            <StyledInput
+                value={value}
+                onChange={onChange}
+                onBlur={() => {
+                    setIsTouched(true);
+                    onBlur;
+                }}
+                error={isTouched && error}
+                className='w-[300px] md:w-[357px]'
+            />
+            {isTouched && error && errorMessage && (
+                <span className='text-danger pt-1.5 pl-6'>{errorMessage}</span>
+            )}
+        </div>
+    );
+};
 export default Input;

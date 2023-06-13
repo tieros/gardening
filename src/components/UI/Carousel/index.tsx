@@ -6,7 +6,6 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 
 const StyledSwiper = styled(Swiper)`
-    border-radius: 30px;
     box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.25),
         inset 2px 2px 4px rgba(0, 0, 0, 0.25);
 
@@ -34,11 +33,12 @@ const StyledSwiper = styled(Swiper)`
 type Props = {
     slides: React.ReactNode[];
     className?: string;
+    arrows?: boolean;
 };
-const Carousel = ({ slides, className }: Props) => (
+const Carousel = ({ slides, className, arrows = true }: Props) => (
     <StyledSwiper
         cssMode={true}
-        navigation={true}
+        navigation={arrows}
         pagination={true}
         mousewheel={true}
         keyboard={true}

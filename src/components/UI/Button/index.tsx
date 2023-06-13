@@ -19,22 +19,35 @@ const StyledButton = styled.button<Props>`
                     return css`
                         color: ${theme.colors.dark};
                         background-color: ${theme.colors.pink};
+                        &:hover {
+                            color: ${theme.colors.background};
+                            background-color: #c75f63;
+                        }
                     `;
                 case 'secondary':
                     return css`
                         color: ${theme.colors.dark};
                         background-color: ${theme.colors.green};
+                        &:hover {
+                            background-color: #7b8638;
+                        }
                     `;
                 case 'white':
                     return css`
                         color: ${theme.colors.dark};
                         background-color: ${theme.colors.background};
                         border: 1px solid ${theme.colors.dark};
+                        &:hover {
+                            background-color: ${theme.colors.lightGreen};
+                        }
                     `;
                 case 'danger':
                     return css`
                         color: ${theme.colors.background};
                         background-color: ${theme.colors.danger};
+                        &:hover {
+                            background-color: #a43b3f;
+                        }
                     `;
                 default:
                     return null;

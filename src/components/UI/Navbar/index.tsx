@@ -10,6 +10,7 @@ type Props = {
         label: string;
         link: string;
     }[];
+    customStyle?: Record<string, string>;
 };
 
 const StyledNavbar = styled.nav<{ showMenu: boolean }>`
@@ -56,13 +57,14 @@ const MobileMenu = styled.ul<{ showMenu: boolean }>`
         height: calc(100vh - 70px);
     }
 `;
-const Navbar = ({ navElements }: Props) => {
+const Navbar = ({ navElements, customStyle }: Props) => {
     const [showMenu, setShowMenu] = useState(false);
 
     return (
         <StyledNavbar
             showMenu={showMenu}
-            className='flex w-full justify-between align-center shadow-mobileNavbar md:shadow-none'
+            style={customStyle}
+            className='navbar-container flex w-full justify-between align-center shadow-mobileNavbar md:shadow-none'
         >
             {!showMenu ? (
                 <div

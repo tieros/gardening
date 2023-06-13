@@ -5,11 +5,14 @@ import { useState } from 'react';
 import LeafImage from '../../assets/heroImage.png';
 import Image from 'next/image';
 import Logo from '../Icons/Logo';
+import InstagramIcon from '../Icons/InstagramIcon';
+import YoutubeIcon from '../Icons/YoutubeIcon';
+import TwitterIcon from '../Icons/TwitterIcon';
 
 const Footer = () => {
     const [subscribeEmail, setSubscribeEmail] = useState('');
     return (
-        <div className='relative mt-[90vh] md:mt-[60vh] 2xl:mt-[65vh]'>
+        <div className='relative'>
             <Image
                 width={518}
                 height={355}
@@ -22,7 +25,7 @@ const Footer = () => {
                     <Logo />
                 </div>
 
-                <div className='grid grid-cols-2 lg:grid-cols-1 md:text-xl text-lg font-rubik gap-[30px] min-w-[300px] md:min-w-[357px]'>
+                <div className='grid grid-cols-2 lg:grid-cols-1 md:text-xl text-lg text-dark font-rubik gap-[30px] min-w-[300px] md:min-w-[357px]'>
                     <Link href='#'>Home</Link>
                     <Link href='#'>How It Works</Link>
                     <Link href='#'>Services</Link>
@@ -32,12 +35,19 @@ const Footer = () => {
                     <Input
                         value={subscribeEmail}
                         label={
-                            <p className='my-5 lg:my-0 lg:mb-5'>Subscribe</p>
+                            <p className='my-5 lg:my-0 lg:mb-5 text-pink font-semibold text-lg'>
+                                Subscribe
+                            </p>
                         }
                         onChange={(event) =>
                             setSubscribeEmail(event.target.value)
                         }
                     />
+                    <div className='flex gap-3 mt-7'>
+                        <InstagramIcon />
+                        <YoutubeIcon />
+                        <TwitterIcon />
+                    </div>
                 </div>
             </div>
         </div>

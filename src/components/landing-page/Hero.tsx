@@ -2,22 +2,36 @@ import styled from 'styled-components';
 import Button from '../UI/Button';
 import Image from 'next/image';
 import HeroImage from '../../assets/heroImage.png';
-import { useEffect, useState } from 'react';
+import BackgroundClipImage from '../../assets/testimonialsbg.jpg';
 
-const StyledHero = styled.div`
+const StyledHeroWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 50px;
     margin-top: 50px;
     position: relative;
     z-index: 1;
+
+    .custom-text {
+        background: linear-gradient(to right, #54443f, transparent),
+            url(${BackgroundClipImage.src});
+        background-size: cover;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
 `;
 
 const Hero = () => {
     return (
         <>
-            <StyledHero className='p-4 md:p-10 mb-[100px]'>
-                <h1 className='text-dark'>Find your gardener</h1>
+            <StyledHeroWrapper className='p-4 md:p-10 mb-[100px]'>
+                <h1 className='text-dark'>
+                    Find your{' '}
+                    <span className='custom-text text-5xl md:text-6xl lg:text-7xl font-semibold font-rubik'>
+                        gardener
+                    </span>
+                </h1>
                 <p className='text-dark md:w-[50%] backdrop-blur text-lg'>
                     We are here nearby you to provide gardening services.We are
                     here nearby you to provide gardening services
@@ -26,7 +40,7 @@ const Hero = () => {
                     <Button mode='primary'>Search Now</Button>
                     <Button mode='white'>Create Account</Button>
                 </div>
-            </StyledHero>
+            </StyledHeroWrapper>
             <Image
                 src={HeroImage}
                 alt='green-leaf-image'
