@@ -2,6 +2,9 @@ import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import { useState } from 'react';
 import { validateEmail } from '@/utils/validation';
+import OnePlantImage from '../../src/assets/oneplant.png';
+import Image from 'next/image';
+
 type Props = {
     setIsLoginPage: (val: boolean) => void;
 };
@@ -62,9 +65,21 @@ const SignUp = ({ setIsLoginPage }: Props) => {
                 />
                 <div className='md:col-span-2 flex flex-col items-center'>
                     <Button>Sign Up</Button>
-                    <p className='mt-5'>
+                    <p className='mt-5 inline-flex items-center'>
                         Already have account?{' '}
-                        <u onClick={() => setIsLoginPage(true)}>Login</u>
+                        <u
+                            onClick={() => setIsLoginPage(true)}
+                            className='cursor-pointer ml-1'
+                        >
+                            Login
+                        </u>
+                        <Image
+                            className='ml-2'
+                            width={30}
+                            height={30}
+                            src={OnePlantImage}
+                            alt='one-plant-image'
+                        />
                     </p>
                 </div>
             </form>

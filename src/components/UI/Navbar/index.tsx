@@ -10,7 +10,7 @@ type Props = {
         label: string;
         link: string;
     }[];
-    customStyle?: Record<string, string>;
+    customStyle?: string;
 };
 
 const StyledNavbar = styled.nav<{ showMenu: boolean }>`
@@ -63,8 +63,7 @@ const Navbar = ({ navElements, customStyle }: Props) => {
     return (
         <StyledNavbar
             showMenu={showMenu}
-            style={customStyle}
-            className='navbar-container flex w-full justify-between align-center shadow-mobileNavbar md:shadow-none'
+            className={`${customStyle} flex w-full justify-between align-center shadow-mobileNavbar md:shadow-none`}
         >
             {!showMenu ? (
                 <div

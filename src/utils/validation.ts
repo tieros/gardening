@@ -1,6 +1,7 @@
 export const validateEmail = (email: string): boolean => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
+    console.log(emailPattern.test(email));
+    return !emailPattern.test(email);
 };
 
 export const validatePassword = (password: string): boolean => {

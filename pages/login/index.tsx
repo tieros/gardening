@@ -4,12 +4,20 @@ import Navbar from '@/components/UI/Navbar';
 import { useState } from 'react';
 import Button from '@/components/UI/Button';
 import styled from 'styled-components';
-import Image from '../../src/assets/card-bg.jpg';
+import PlantImage from '../../src/assets/card-bg.jpg';
 import SignUp from './SignUp';
 import { validateEmail } from '@/utils/validation';
+import OnePlantImage from '../../src/assets/oneplant.png';
+import Image from 'next/image';
+import MobilePlantImage from '../../src/assets/heroImage.png';
+import { Modal } from '@/components/UI/Modal';
+
+const StyledLoginPageWrapper = styled.div<{ isLoginPage: boolean }>`
+    overflow: ${({ isLoginPage }) => (isLoginPage ? 'hidden' : 'scroll')};
+`;
 
 const StyledRightColumn = styled.div`
-    background: url(${Image.src});
+    background: url(${PlantImage.src});
     background-size: cover;
 `;
 
@@ -17,22 +25,30 @@ const StyledForm = styled.form`
     height: calc(100vh - 110px);
 `;
 
+const StyledMobileImage = styled.div<{ isLoginPage: boolean }>`
+    display: ${({ isLoginPage }) => (isLoginPage ? 'visible' : 'none')};
+    position: absolute;
+    bottom: 0;
+    right: -5%;
+    rotate: 240deg;
+`;
+
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoginPage, setIsLoginPage] = useState(true);
     return (
-        <div className='bg-background w-full h-[100vh]'>
+        <StyledLoginPageWrapper
+            isLoginPage={isLoginPage}
+            className='bg-background w-full h-[100vh] relative'
+        >
             <Navbar
                 navElements={navElements}
-                customStyle={{
-                    justifyContent: 'space-around',
-                    position: 'absolute',
-                }}
+                customStyle='md:!absolute !justify-around'
             />
-            <div className='flex h-[100vh] justify-center md:justify-start 2xl:justify-between'>
+            <div className='flex justify-center 2xl:justify-between items-center bg-background'>
                 {isLoginPage ? (
-                    <StyledForm className='self-center basis-full md:basis-1/2 p-16 md:p-20 flex flex-col gap-14 max-w-max xl:max-w-none 2xl:items-center justify-center bg-background'>
+                    <StyledForm className='self-center basis-full md:basis-1/2 p-8 md:p-20 flex flex-col gap-14 max-w-max xl:max-w-none 2xl:items-center md:justify-center z-10'>
                         <h1 className='text-dark max-w-[357px]'>Login</h1>
                         <Input
                             value={email}
@@ -64,11 +80,21 @@ const LoginPage = () => {
                         />
                         <div className='self-center flex flex-col items-center'>
                             <Button>Login</Button>
-                            <p className='mt-5'>
+                            <p className='mt-5 inline-flex items-center'>
                                 Don&apos;t have account?{' '}
-                                <u onClick={() => setIsLoginPage(false)}>
+                                <u
+                                    onClick={() => setIsLoginPage(false)}
+                                    className='cursor-pointer ml-1'
+                                >
                                     Sign up
                                 </u>
+                                <Image
+                                    className='ml-2'
+                                    width={30}
+                                    height={30}
+                                    src={OnePlantImage}
+                                    alt='one-plant-image'
+                                />
                             </p>
                         </div>
                     </StyledForm>
@@ -77,8 +103,19 @@ const LoginPage = () => {
                 )}
 
                 <StyledRightColumn className='hidden md:block md:flex-grow bg-red-800 h-[100vh]'></StyledRightColumn>
+                <StyledMobileImage
+                    isLoginPage={isLoginPage}
+                    className='md:hidden'
+                >
+                    <Image
+                        src={MobilePlantImage}
+                        alt='plant-image'
+                        width={188}
+                        height={124}
+                    />
+                </StyledMobileImage>
             </div>
-        </div>
+        </StyledLoginPageWrapper>
     );
 };
 export default LoginPage;
