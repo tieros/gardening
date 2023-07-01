@@ -1,6 +1,5 @@
 export const validateEmail = (email: string): boolean => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log(emailPattern.test(email));
     return !emailPattern.test(email);
 };
 
@@ -11,16 +10,16 @@ export const validatePassword = (password: string): boolean => {
     const digitPattern = /[0-9]/;
 
     if (password.length < minLength) {
-        return false; // Password is too short
+        return true; // Password is too short
     }
 
     if (!uppercasePattern.test(password)) {
-        return false; // Password does not contain an uppercase letter
+        return true; // Password does not contain an uppercase letter
     }
 
     if (!digitPattern.test(password)) {
-        return false; // Password does not contain a digit
+        return true; // Password does not contain a digit
     }
 
-    return true;
+    return false;
 };

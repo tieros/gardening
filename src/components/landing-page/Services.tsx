@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Tag from '../UI/Tag';
 
-const StyledServicesWrapper = styled.div`
+const StyledServicesWrapper = styled.section`
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@ const StyledServicesWrapper = styled.div`
 `;
 
 const Services = () => (
-    <StyledServicesWrapper className='my-20'>
+    <StyledServicesWrapper id='services' className='my-20'>
         <h2 className='text-dark'>Top Services</h2>
         <p className='text-xl lg:text-3xl max-w-[800px] text-center text-dark'>
             Here some of our most requested services, but not limited to...

@@ -4,6 +4,7 @@ type Props = {
     onClick?: () => void;
     mode?: 'primary' | 'secondary' | 'white' | 'danger';
     children: React.ReactNode;
+    type?: 'button' | 'submit' | 'reset';
 };
 
 const StyledButton = styled.button<Props>`
@@ -56,10 +57,16 @@ const StyledButton = styled.button<Props>`
     `}
 `;
 
-const Button = ({ onClick, mode = 'primary', children }: Props) => (
+const Button = ({
+    onClick,
+    mode = 'primary',
+    children,
+    type = 'button',
+}: Props) => (
     <StyledButton
         mode={mode}
         onClick={onClick}
+        type={type}
         className='w-[155px] md:w-[300px] h-[45px] md:h-[58px] text-base md:text-lg'
     >
         {children}

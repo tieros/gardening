@@ -4,7 +4,7 @@ import Image from 'next/image';
 import ImgEx from '../../assets/map.png';
 import Carousel from '../UI/Carousel';
 
-const StyledGreenColumn = styled.div`
+const StyledGreenColumn = styled.section`
     background: url(${CardBg.src});
     border-radius: 16px;
     background-size: cover;
@@ -45,7 +45,10 @@ const slides = [
 ];
 
 const HowItWorks = () => (
-    <StyledGreenColumn className='w-full lg:w-[50%] h-[80vh] md:h-[60vh] lg:h-[80vh] lg:relative'>
+    <StyledGreenColumn
+        id='howitworks'
+        className='w-full lg:w-[50%] h-[80vh] md:h-[60vh] lg:h-[80vh] lg:relative'
+    >
         <StyledGlassLayer className='flex flex-col gap-8 p-5 md:p-10'>
             <h2 className='text-background'>How It Works</h2>
             <Carousel

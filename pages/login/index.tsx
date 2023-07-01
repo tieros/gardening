@@ -1,7 +1,7 @@
 import Input from '@/components/UI/Input';
 import { navElements } from '..';
 import Navbar from '@/components/UI/Navbar';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from '@/components/UI/Button';
 import styled from 'styled-components';
 import PlantImage from '../../src/assets/card-bg.jpg';
@@ -10,7 +10,18 @@ import { validateEmail } from '@/utils/validation';
 import OnePlantImage from '../../src/assets/oneplant.png';
 import Image from 'next/image';
 import MobilePlantImage from '../../src/assets/heroImage.png';
-import { Modal } from '@/components/UI/Modal';
+import { useMutation } from '@apollo/client';
+import { gql } from 'graphql-tag';
+import { useRouter } from 'next/router';
+import { AuthContext } from '../AuthContext';
+const LOGIN_MUTATION = gql`
+    mutation Login($email: String!, $password: String!) {
+        login(input: { email: $email, password: $password }) {
+            accessToken
+            uid
+        }
+    }
+`;
 
 const StyledLoginPageWrapper = styled.div<{ isLoginPage: boolean }>`
     overflow: ${({ isLoginPage }) => (isLoginPage ? 'hidden' : 'scroll')};
@@ -37,6 +48,29 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoginPage, setIsLoginPage] = useState(true);
+
+    const router = useRouter();
+
+    const [loginMutation] = useMutation(LOGIN_MUTATION);
+    const { setAuthData } = useContext(AuthContext);
+    const loginHandler = async () => {
+        try {
+            const { data } = await loginMutation({
+                variables: { email, password },
+            });
+
+            const user = data.login;
+
+            if (user) {
+                setAuthData({ uid: user?.uid, isAuthenticated: true });
+                localStorage.setItem('accessToken', user.accessToken);
+                router.push('/account');
+            }
+        } catch (error) {
+            console.log('Login failed:', error);
+        }
+    };
+
     return (
         <StyledLoginPageWrapper
             isLoginPage={isLoginPage}
@@ -48,7 +82,13 @@ const LoginPage = () => {
             />
             <div className='flex justify-center 2xl:justify-between items-center bg-background'>
                 {isLoginPage ? (
-                    <StyledForm className='self-center basis-full md:basis-1/2 p-8 md:p-20 flex flex-col gap-14 max-w-max xl:max-w-none 2xl:items-center md:justify-center z-10'>
+                    <StyledForm
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            loginHandler();
+                        }}
+                        className='self-center basis-full md:basis-1/2 p-8 md:p-20 flex flex-col gap-14 max-w-max xl:max-w-none 2xl:items-center md:justify-center z-10'
+                    >
                         <h1 className='text-dark max-w-[357px]'>Login</h1>
                         <Input
                             value={email}
@@ -67,8 +107,8 @@ const LoginPage = () => {
                             onChange={(event) =>
                                 setPassword(event.target.value)
                             }
-                            onBlur={() => validateEmail(password)}
-                            error={validateEmail(password)}
+                            onBlur={() => console.log(password)}
+                            error={password.length < 1}
                             errorMessage={
                                 <span>Please enter valid password</span>
                             }
@@ -79,7 +119,7 @@ const LoginPage = () => {
                             }
                         />
                         <div className='self-center flex flex-col items-center'>
-                            <Button>Login</Button>
+                            <Button type='submit'>Login</Button>
                             <p className='mt-5 inline-flex items-center'>
                                 Don&apos;t have account?{' '}
                                 <u

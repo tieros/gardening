@@ -1,33 +1,9 @@
 import { ServiceName } from '@prisma/client';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../supabase';
 
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
-export const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_KEY!,
-);
-
-const handleLogin = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-    });
-
-    if (error) {
-        throw new Error(error.message);
-    }
-
-    const currentUser = await prisma.user.findUnique({
-        where: { id: data?.user?.id },
-    });
-    return {
-        accessToken: data?.session?.access_token,
-        expiresIn: data?.session?.expires_in,
-        user: currentUser,
-    };
-};
 
 export const resolvers = {
     Query: {
@@ -76,18 +52,30 @@ export const resolvers = {
             const createdUser = await prisma.user.create({
                 data: {
                     id: data?.user?.id,
-                    email: input.email,
+                    email: data?.user?.email,
                     name: input.name,
                     surname: input.surname,
                 },
             });
-            const loginData = await handleLogin(input.email, input.password);
-
-            return loginData;
+            return {
+                uid: data?.user?.id,
+                accessToken: data?.session?.access_token,
+            };
         },
         login: async (_, { input }) => {
-            const loginData = await handleLogin(input.email, input.password);
-            return loginData;
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: input.email,
+                password: input.password,
+            });
+
+            if (error) {
+                throw new Error(error.message);
+            }
+
+            return {
+                uid: data?.user?.id,
+                accessToken: data?.session?.access_token,
+            };
         },
         logout: async () => {
             const { error } = await supabase.auth.signOut();

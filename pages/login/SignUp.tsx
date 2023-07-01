@@ -1,7 +1,7 @@
 import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import { useState } from 'react';
-import { validateEmail } from '@/utils/validation';
+import { validateEmail, validatePassword } from '@/utils/validation';
 import OnePlantImage from '../../src/assets/oneplant.png';
 import Image from 'next/image';
 
@@ -13,6 +13,8 @@ const SignUp = ({ setIsLoginPage }: Props) => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
+    console.log(validatePassword(password));
+
     return (
         <div className='max-w-[900px] gap-14 flex flex-col justify-center items-center p-10 basis-full xl:basis-[80%] 2xl:basis-2/3'>
             <h1 className='text-dark max-w-[357px]'>Sign Up</h1>
@@ -32,8 +34,8 @@ const SignUp = ({ setIsLoginPage }: Props) => {
                 <Input
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    onBlur={() => validateEmail(password)}
-                    error={validateEmail(password)}
+                    onBlur={() => validatePassword(password)}
+                    error={validatePassword(password)}
                     errorMessage={<span>Please enter valid password</span>}
                     label={
                         <span className='text-2xl text-dark font-semibold'>

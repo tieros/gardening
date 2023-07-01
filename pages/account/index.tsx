@@ -1,47 +1,32 @@
-import { FunctionComponent, useState } from 'react';
-import { useMutation } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import Layout from '@/components/account-page/Layout';
+import { supabase } from '../api/supabase';
+import protectedRoute from './protectedRoute';
 import { gql } from 'graphql-tag';
-
-const LOGIN_MUTATION = gql`
-    mutation Login($email: String!, $password: String!) {
-        login(input: { email: $email, password: $password }) {
-            accessToken
-            expiresIn
-            user {
-                name
-            }
-        }
-    }
-`;
+import { useQuery } from '@apollo/client';
+import Map from '@/components/account-page/Map';
 
 const Account = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [user, setUser] = useState();
 
-    const [loginMutation, { data }] = useMutation(LOGIN_MUTATION);
+    // const GET_USER = gql`
+    //     mutation Login($email: String!, $password: String!) {
+    //         login(input: { email: $email, password: $password }) {
+    //             accessToken
+    //             uid
+    //         }
+    //     }
+    // `;
+    // const { data, loading } = useQuery(GET_USER);
 
-    console.log(data);
     return (
         <div>
-            <input
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-                onClick={() =>
-                    loginMutation({ variables: { email, password } })
-                }
-            >
-                Click
-            </button>
+            <Layout>
+                <h1>Welcome</h1>
+                <Map />
+            </Layout>
         </div>
     );
 };
 
-export default Account;
+export default protectedRoute(Account);

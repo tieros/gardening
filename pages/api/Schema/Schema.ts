@@ -26,7 +26,7 @@ export const typeDefs = gql`
         createUser(input: UserInput!): User!
         updateUser(id: String!, input: UserInput!): User!
         deleteUser(id: String!): User!
-        signup(input: RegisterInput!): User!
+        signup(input: RegisterInput!): AuthPayload!
         login(input: LoginInput!): AuthPayload!
         logout: Boolean!
     }
@@ -82,9 +82,8 @@ export const typeDefs = gql`
     }
 
     type AuthPayload {
-        user: User!
         accessToken: String!
-        expiresIn: Int!
+        uid: String!
     }
 
     enum ServiceName {

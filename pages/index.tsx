@@ -11,7 +11,7 @@ import Footer from '@/components/landing-page/Footer';
 export const navElements = [
     { label: 'How It Works', link: '#howitworks' },
     { label: 'Services', link: '#services' },
-    { label: 'Testimonials', link: '#testimonials' },
+    { label: 'Testimonials', link: '#' },
     { label: 'Login', link: '/login' },
 ];
 
