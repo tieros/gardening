@@ -35,7 +35,6 @@ export const typeDefs = gql`
         name: String!
         surname: String!
         services: [Service!]!
-        points: Int!
         location: Location!
         profilePic: String
         reviews: [Review]
@@ -68,7 +67,7 @@ export const typeDefs = gql`
     type Review {
         id: String!
         comment: String!
-        rating: Float!
+        points: Float!
         gardener: Gardener!
         appointment: Appointment
     }

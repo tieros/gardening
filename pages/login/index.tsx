@@ -64,6 +64,7 @@ const LoginPage = () => {
             if (user) {
                 setAuthData({ uid: user?.uid, isAuthenticated: true });
                 localStorage.setItem('accessToken', user.accessToken);
+                localStorage.setItem('uid', user.uid);
                 router.push('/account');
             }
         } catch (error) {
