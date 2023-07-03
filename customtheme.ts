@@ -24,6 +24,10 @@ export const customtheme = {
             '-129px 0px 52px rgba(0, 0, 0, 0.01), -73px 0px 44px rgba(0, 0, 0, 0.05), -32px 0px 32px rgba(0, 0, 0, 0.09), -8px 0px 18px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)',
         howItWorksCard:
             '0px 4px 4px rgba(0, 0, 0, 0.25), inset -2px -2px 4px rgba(0, 0, 0, 0.25);',
+        profileCard:
+            '0px 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 5px 5px 0px rgba(0, 0, 0, 0.09), 0px 11px 6px 0px rgba(0, 0, 0, 0.05), 0px 19px 8px 0px rgba(0, 0, 0, 0.01), 0px 29px 8px 0px rgba(0, 0, 0, 0);',
+        mapContainer:
+            ' 0px 4px 3px 0px rgba(153, 134, 134, 0.13) inset, 0px -4px 0px 0px #F7F6F3 inset;',
         footer: 'inset 0px -4px 0px #EBEFE6, inset 0px 4px 3px #DBDDCB;',
     },
 };
