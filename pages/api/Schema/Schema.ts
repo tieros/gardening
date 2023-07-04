@@ -4,6 +4,7 @@ export const typeDefs = gql`
     type Query {
         gardener(id: String!): Gardener
         gardeners: [Gardener!]!
+        searchGardeners(searchQuery: String): [Gardener!]!
         service(id: String!): Service
         services: [Service!]!
         location(id: String!): Location

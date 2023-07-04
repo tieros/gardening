@@ -9,6 +9,40 @@ export const resolvers = {
     Query: {
         gardener: (_, { id }) => prisma.gardener.findUnique({ where: { id } }),
         gardeners: () => prisma.gardener.findMany(),
+        searchGardeners: async (_, { searchQuery }) => {
+            let gardeners;
+
+            if (Object.values(ServiceName).includes(searchQuery)) {
+                // If searchQuery is a valid enum value, search by service name
+                gardeners = await prisma.gardener.findMany({
+                    where: {
+                        services: {
+                            some: {
+                                name: searchQuery,
+                            },
+                        },
+                    },
+                });
+            } else {
+                // If searchQuery is not an enum value, search by name, surname, and location
+                gardeners = await prisma.gardener.findMany({
+                    where: {
+                        OR: [
+                            { name: { contains: searchQuery || '' } },
+                            { surname: { contains: searchQuery || '' } },
+                            {
+                                location: {
+                                    address: { contains: searchQuery || '' },
+                                },
+                            },
+                        ],
+                    },
+                });
+            }
+
+            return gardeners;
+        },
+
         service: (_, { servicename }: ServiceName) =>
             prisma.service.findUnique({ where: { servicename } }),
         services: () => prisma.service.findMany(),

@@ -8,10 +8,10 @@ import {
 import Image from 'next/image';
 import StarRating from '../UI/StarRating';
 import styled from 'styled-components';
-import { Gardener } from './GardenerProfileCard';
+import { GardenerProfile } from './GardenerProfileCard';
 
 type Props = {
-    gardeners: Gardener[];
+    gardeners: GardenerProfile[];
 };
 
 const StyledImage = styled(Image)`
@@ -19,7 +19,7 @@ const StyledImage = styled(Image)`
 `;
 
 const Map = ({ gardeners }: Props) => {
-    const [selectedMarker, setSelectedGardener] = useState<Gardener>();
+    const [selectedMarker, setSelectedGardener] = useState<GardenerProfile>();
 
     const mapContainerStyle = {
         height: '400px',
