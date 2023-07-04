@@ -10,12 +10,16 @@ import BookingModal from './BookingModal';
 export type GardenerProfile = {
     id: number;
     name: string;
-    latitude: number;
-    longitude: number;
+    location: {
+        latitude: number;
+        longitude: number;
+        address: string;
+    };
     profilePic: string;
     points: number;
-    address: string;
-    services: string[];
+    services: {
+        name: string;
+    }[];
     info?: string;
 };
 
@@ -40,6 +44,7 @@ const StyledCardContainer = styled.div`
 
 const GardenerProfileCard = ({ gardener }: Props) => {
     const [bookingIsOpen, setBookingIsOpen] = useState(false);
+
     return (
         <StyledCardContainer>
             <div className='flex gap-4 items-center w-full'>
@@ -59,7 +64,7 @@ const GardenerProfileCard = ({ gardener }: Props) => {
                     </div>
                     <div className='inline-flex gap-[5px]'>
                         <LocationTagIcon width={16} height={23} />
-                        {gardener.address}
+                        {gardener.location.address}
                     </div>
                 </div>
             </div>
@@ -69,7 +74,7 @@ const GardenerProfileCard = ({ gardener }: Props) => {
             <div>
                 {gardener.services.map((service, index) => (
                     <Tag
-                        label={`#${service.toLowerCase()}`}
+                        label={`#${service.name.toLocaleLowerCase()}`}
                         key={index}
                         size='small'
                     />
@@ -81,7 +86,9 @@ const GardenerProfileCard = ({ gardener }: Props) => {
             {bookingIsOpen && (
                 <BookingModal
                     onClose={setBookingIsOpen}
-                    availableServices={gardener.services}
+                    availableServices={gardener.services.map(
+                        (service) => service.name,
+                    )}
                 />
             )}
         </StyledCardContainer>

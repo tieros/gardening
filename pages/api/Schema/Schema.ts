@@ -37,6 +37,7 @@ export const typeDefs = gql`
         surname: String!
         services: [Service!]!
         location: Location!
+        points: Float
         profilePic: String
         reviews: [Review]
         appointments: [Appointment]

@@ -14,6 +14,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { useRouter } from 'next/router';
 import { AuthContext } from '../AuthContext';
+
 const LOGIN_MUTATION = gql`
     mutation Login($email: String!, $password: String!) {
         login(input: { email: $email, password: $password }) {

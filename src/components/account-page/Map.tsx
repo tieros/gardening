@@ -51,12 +51,12 @@ const Map = ({ gardeners }: Props) => {
             zoom={12}
             center={center}
         >
-            {gardeners.map((gardener) => (
+            {gardeners?.map((gardener) => (
                 <Marker
                     key={gardener.id}
                     position={{
-                        lat: gardener.latitude,
-                        lng: gardener.longitude,
+                        lat: Number(gardener.location.latitude),
+                        lng: Number(gardener.location.longitude),
                     }}
                     label={gardener.name}
                     onClick={() => setSelectedGardener(gardener)}
@@ -65,8 +65,8 @@ const Map = ({ gardeners }: Props) => {
             {selectedGardener && (
                 <InfoWindow
                     position={{
-                        lat: selectedGardener.latitude,
-                        lng: selectedGardener.longitude,
+                        lat: Number(selectedGardener.location.latitude),
+                        lng: Number(selectedGardener.location.longitude),
                     }}
                     onCloseClick={() => setSelectedGardener(undefined)}
                 >
@@ -90,7 +90,7 @@ const Map = ({ gardeners }: Props) => {
                             </div>
                             <div className='inline-flex gap-[5px]'>
                                 <LocationTagIcon width={16} height={23} />{' '}
-                                {selectedGardener.address}
+                                {selectedGardener.location.address}
                             </div>
                         </div>
                     </div>
