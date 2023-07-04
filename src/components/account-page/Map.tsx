@@ -9,6 +9,7 @@ import Image from 'next/image';
 import StarRating from '../UI/StarRating';
 import styled from 'styled-components';
 import { GardenerProfile } from './GardenerProfileCard';
+import LocationTagIcon from '../Icons/LocationTagIcon';
 
 type Props = {
     gardeners: GardenerProfile[];
@@ -19,11 +20,12 @@ const StyledImage = styled(Image)`
 `;
 
 const Map = ({ gardeners }: Props) => {
-    const [selectedMarker, setSelectedGardener] = useState<GardenerProfile>();
+    const [selectedGardener, setSelectedGardener] = useState<GardenerProfile>();
 
     const mapContainerStyle = {
-        height: '400px',
+        height: '550px',
         width: '100%',
+        borderRadius: '15px',
     };
 
     const center = {
@@ -60,26 +62,36 @@ const Map = ({ gardeners }: Props) => {
                     onClick={() => setSelectedGardener(gardener)}
                 />
             ))}
-            {selectedMarker && (
+            {selectedGardener && (
                 <InfoWindow
                     position={{
-                        lat: selectedMarker.latitude,
-                        lng: selectedMarker.longitude,
+                        lat: selectedGardener.latitude,
+                        lng: selectedGardener.longitude,
                     }}
                     onCloseClick={() => setSelectedGardener(undefined)}
                 >
-                    <div className='flex p-5'>
-                        <div className='w-[30px] h-[30px]'>
-                            <StyledImage
-                                src={selectedMarker.profilePic}
-                                alt='gardener-profile-picture'
-                                width={30}
-                                height={30}
-                            />
-                        </div>
-                        <div className='flex flex-col'>
-                            <h5>{selectedMarker.name}</h5>
-                            <StarRating rating={selectedMarker.points} />
+                    <div className='flex gap-4 items-center w-full p-5'>
+                        <StyledImage
+                            src={selectedGardener.profilePic}
+                            alt='gardener-profile-picture'
+                            width={30}
+                            height={30}
+                        />
+
+                        <div className='flex justify-between min-w-[226px] items-baseline w-full'>
+                            <div className='flex flex-col'>
+                                <h6 className='text-dark font-semibold'>
+                                    {selectedGardener.name}
+                                </h6>
+                                <StarRating
+                                    rating={selectedGardener.points}
+                                    readOnly={true}
+                                />
+                            </div>
+                            <div className='inline-flex gap-[5px]'>
+                                <LocationTagIcon width={16} height={23} />{' '}
+                                {selectedGardener.address}
+                            </div>
                         </div>
                     </div>
                 </InfoWindow>

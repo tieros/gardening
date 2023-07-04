@@ -4,6 +4,8 @@ import Image from 'next/image';
 import StarRating from '../UI/StarRating';
 import Tag from '../UI/Tag';
 import LocationTagIcon from '../Icons/LocationTagIcon';
+import { useState } from 'react';
+import BookingModal from './BookingModal';
 
 export type GardenerProfile = {
     id: number;
@@ -37,9 +39,10 @@ const StyledCardContainer = styled.div`
 `;
 
 const GardenerProfileCard = ({ gardener }: Props) => {
+    const [bookingIsOpen, setBookingIsOpen] = useState(false);
     return (
         <StyledCardContainer>
-            <div className='flex items-center gap-4'>
+            <div className='flex gap-4 items-center w-full'>
                 <StyledImage
                     src={gardener.profilePic}
                     alt='gardener-profile-picture'
@@ -47,7 +50,7 @@ const GardenerProfileCard = ({ gardener }: Props) => {
                     height={30}
                 />
 
-                <div className='flex justify-between min-w-[226px]'>
+                <div className='flex justify-between min-w-[226px] items-baseline w-full'>
                     <div className='flex flex-col'>
                         <h6 className='text-dark font-semibold'>
                             {gardener.name}
@@ -55,7 +58,8 @@ const GardenerProfileCard = ({ gardener }: Props) => {
                         <StarRating rating={4.4} readOnly={true} />
                     </div>
                     <div className='inline-flex gap-[5px]'>
-                        <LocationTagIcon width={16} height={23} /> New York
+                        <LocationTagIcon width={16} height={23} />
+                        {gardener.address}
                     </div>
                 </div>
             </div>
@@ -71,7 +75,15 @@ const GardenerProfileCard = ({ gardener }: Props) => {
                     />
                 ))}
             </div>
-            <Button mode='secondary'>Book Appointment</Button>
+            <Button mode='secondary' onClick={() => setBookingIsOpen(true)}>
+                Book Appointment
+            </Button>
+            {bookingIsOpen && (
+                <BookingModal
+                    onClose={setBookingIsOpen}
+                    availableServices={gardener.services}
+                />
+            )}
         </StyledCardContainer>
     );
 };

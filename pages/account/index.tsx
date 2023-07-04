@@ -17,7 +17,7 @@ const mockGardeners = [
         profilePic: 'https://randomuser.me/api/portraits/men/33.jpg',
         points: 4.7,
         address: 'London',
-        services: ['MOWING'],
+        services: ['MOWING', 'FERTILIZATION', 'GARDEN DESIGN'],
         info: 'I am a hebe hube auedm euroed meejösö.',
     },
     {

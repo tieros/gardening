@@ -1,3 +1,4 @@
+import { type } from 'os';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ export type Props = {
     error?: boolean;
     errorMessage?: React.ReactNode;
     label?: React.ReactNode;
+    type?: 'text' | 'number' | 'date';
 };
 
 const StyledInput = styled.input<Props>`
@@ -25,6 +27,7 @@ const Input = ({
     onBlur,
     errorMessage,
     label,
+    type = 'text',
 }: Props) => {
     const [isTouched, setIsTouched] = useState(false);
     return (
@@ -39,6 +42,7 @@ const Input = ({
                 }}
                 error={isTouched && error}
                 className='w-[300px] md:w-[357px]'
+                type={type}
             />
             {isTouched && error && errorMessage && (
                 <span className='text-danger pt-1.5 pl-6'>{errorMessage}</span>
