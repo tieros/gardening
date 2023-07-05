@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 type Props = {
     size?: 'small' | 'medium' | 'large';
-    label: string;
+    label: React.ReactNode;
     mode?: 'default' | 'light';
 };
 
