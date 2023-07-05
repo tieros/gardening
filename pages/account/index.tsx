@@ -42,7 +42,7 @@ const Account = () => {
         <div>
             <Layout>
                 <div className='p-8 bg-white flex rounded-[30px] m-[30px] shadow-mapContainer gap-[50px]'>
-                    <div className='basis-1/3 flex flex-col gap-5 h-[572px] overflow-y-scroll p-2'>
+                    <div className='basis-[40%] flex flex-col gap-5 h-[572px] overflow-y-scroll p-2'>
                         <GardenerSearchBox
                             setFilteredGardeners={setFilteredGardeners}
                             setIsLoading={setIsLoading}
@@ -71,7 +71,7 @@ const Account = () => {
                             )
                         )}
                     </div>
-                    <div className='basis-2/3'>
+                    <div className='basis-[60%]'>
                         <Map gardeners={data?.gardeners} />
                     </div>
                 </div>

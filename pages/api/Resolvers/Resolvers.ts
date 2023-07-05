@@ -12,15 +12,22 @@ export const resolvers = {
         searchGardeners: async (_, { searchQuery }) => {
             let gardeners;
 
-            if (Object.values(ServiceName).includes(searchQuery)) {
+            if (
+                Array.isArray(searchQuery) &&
+                searchQuery.some((item) =>
+                    Object.values(ServiceName).includes(item),
+                )
+            ) {
                 // If searchQuery is a valid enum value, search by service name
                 gardeners = await prisma.gardener.findMany({
                     where: {
-                        services: {
-                            some: {
-                                name: searchQuery,
+                        AND: searchQuery.map((service) => ({
+                            services: {
+                                some: {
+                                    name: service,
+                                },
                             },
-                        },
+                        })),
                     },
                 });
             } else {
@@ -28,11 +35,11 @@ export const resolvers = {
                 gardeners = await prisma.gardener.findMany({
                     where: {
                         OR: [
-                            { name: { contains: searchQuery || '' } },
-                            { surname: { contains: searchQuery || '' } },
+                            { name: { contains: searchQuery[0] || '' } },
+                            { surname: { contains: searchQuery[0] || '' } },
                             {
                                 location: {
-                                    address: { contains: searchQuery || '' },
+                                    address: { contains: searchQuery[0] || '' },
                                 },
                             },
                         ],

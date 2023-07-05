@@ -71,7 +71,7 @@ const GardenerProfileCard = ({ gardener }: Props) => {
 
             <div className='text-lightText'>{gardener.info}</div>
 
-            <div>
+            <div className='w-full flex gap-2 justify-center'>
                 {gardener.services.map((service, index) => (
                     <Tag
                         label={`#${service.name.toLocaleLowerCase()}`}
