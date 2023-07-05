@@ -19,6 +19,10 @@ const StyledInput = styled.input<Props>`
     border-radius: 30px;
     background-color: ${({ theme }) => theme.colors.background};
     padding: 24px;
+
+    :focus {
+        outline: 1.5px solid ${({ theme }) => theme.colors.dark};
+    }
 `;
 const Input = ({
     value,
