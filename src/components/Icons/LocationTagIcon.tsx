@@ -11,7 +11,7 @@ const LocationTagIcon = ({ width, height }: Props) => (
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
     >
-        <g id='Location-Icon-9d3 4' clip-path='url(#clip0_10_195)'>
+        <g id='Location-Icon-9d3 4' clipPath='url(#clip0_10_195)'>
             <g id='Group'>
                 <g id='Group_2'>
                     <g id='Group_3'>
@@ -40,7 +40,7 @@ const LocationTagIcon = ({ width, height }: Props) => (
                 id='Vector_3'
                 d='M18 46.1887C22.0424 46.1887 25.3193 45.8223 25.3193 45.3703C25.3193 44.9183 22.0424 44.5519 18 44.5519C13.9576 44.5519 10.6807 44.9183 10.6807 45.3703C10.6807 45.8223 13.9576 46.1887 18 46.1887Z'
                 fill='#E8910E'
-                fill-opacity='0.13'
+                fillOpacity='0.13'
             />
         </g>
         <defs>
