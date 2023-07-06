@@ -42,6 +42,7 @@ const SignUp = ({ setIsLoginPage }: Props) => {
                             Password
                         </span>
                     }
+                    type='password'
                 />
                 <Input
                     value={name}

@@ -114,6 +114,7 @@ const LoginPage = () => {
                             errorMessage={
                                 <span>Please enter valid password</span>
                             }
+                            type='password'
                             label={
                                 <span className='text-2xl text-dark font-semibold'>
                                     Password
