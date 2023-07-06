@@ -41,7 +41,7 @@ const Account = () => {
     return (
         <div>
             <Layout>
-                <div className='p-8 bg-white flex rounded-[30px] m-[30px] shadow-mapContainer gap-[50px]'>
+                <div className='md:p-8 md:bg-white flex flex-col-reverse md:flex-row rounded-[30px] m-3 md:m-[30px] md:shadow-mapContainer gap-[50px]'>
                     <div className='basis-[40%] flex flex-col gap-5 h-[572px] overflow-y-scroll p-2'>
                         <GardenerSearchBox
                             setFilteredGardeners={setFilteredGardeners}

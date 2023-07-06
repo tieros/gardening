@@ -30,9 +30,14 @@ enum ServiceName {
 const availableServices: string[] = Object.values(ServiceName);
 
 const StyledSearchBoxContainer = styled.div`
-    input {
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    input[type='text'] {
         background-color: ${({ theme }) => theme.colors.background};
+        width: 257px;
+
+        @media (min-width: 400px) {
+            width: 300px;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        }
 
         &::placeholder {
             color: ${({ theme }) => theme.colors.dark};

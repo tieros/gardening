@@ -54,83 +54,107 @@ const StyledAppointmentCard = styled.div`
 `;
 const MyAppointments = () => {
     const [reviewModalIsOpen, setReviewModalIsOpen] = useState(false);
+
     return (
         <Layout>
-            <div className='flex gap-5 p-10 flex-col h-[90vh] overflow-y-scroll overflow-x-hidden w-full'>
+            <div className='flex gap-5 p-10 flex-col h-full md:h-[90vh] overflow-y-scroll overflow-x-hidden w-full'>
                 {reviewModalIsOpen ? (
                     <ReviewModal onClose={setReviewModalIsOpen} />
                 ) : null}
-                {mockData.map((appointment) => (
-                    <StyledAppointmentCard key={appointment.id}>
-                        <div className='flex gap-4 w-full flex-col xs:flex-row justify-between'>
-                            <div className='flex gap-4'>
-                                <StyledImage
-                                    src={appointment.gardener.profilePic}
-                                    alt='gardener-profile-picture'
-                                    width={50}
-                                    height={50}
-                                />
-                                <div className='flex flex-col'>
-                                    <h6 className='text-dark font-semibold'>
-                                        {appointment.gardener.name}
-                                    </h6>
-                                    <StarRating rating={4.4} readOnly={true} />
+                {mockData.map((appointment) => {
+                    const appointmentIsDone = appointment.status === 'DONE';
+                    return (
+                        <StyledAppointmentCard key={appointment.id}>
+                            <div className='flex gap-4 w-full flex-col xs:flex-row justify-between'>
+                                <div className='flex gap-4'>
+                                    <StyledImage
+                                        src={appointment.gardener.profilePic}
+                                        alt='gardener-profile-picture'
+                                        width={50}
+                                        height={50}
+                                    />
+                                    <div className='flex flex-col'>
+                                        <h6 className='text-dark font-semibold'>
+                                            {appointment.gardener.name}
+                                        </h6>
+                                        <StarRating
+                                            rating={4.4}
+                                            readOnly={true}
+                                        />
+                                    </div>
+                                </div>
+                                <div className='inline-flex gap-[5px]'>
+                                    <LocationTagIcon width={16} height={23} />
+                                    {appointment.gardener.location.address}
                                 </div>
                             </div>
-                            <div className='inline-flex gap-[5px]'>
-                                <LocationTagIcon width={16} height={23} />
-                                {appointment.gardener.location.address}
-                            </div>
-                        </div>
 
-                        <div className='flex flex-col gap-5 p-7'>
-                            <div className='inline-flex gap-3 flex-wrap'>
+                            <div className='flex flex-col gap-5 p-7'>
+                                <div className='inline-flex gap-3 flex-wrap'>
+                                    <Tag
+                                        mode='light'
+                                        label='Services Requested: '
+                                        size='small'
+                                    />
+                                    <Tag label='#mowing' size='small' />
+                                    <Tag label='#fertilizing' size='small' />
+                                </div>
+
                                 <Tag
                                     mode='light'
-                                    label='Services Requested: '
+                                    label={
+                                        <div className='inline-flex items-center'>
+                                            Status:
+                                            {appointmentIsDone ? (
+                                                <DoneIcon />
+                                            ) : (
+                                                <OngoingIcon />
+                                            )}
+                                            {appointment.status.toLocaleLowerCase()}
+                                        </div>
+                                    }
                                     size='small'
                                 />
-                                <Tag label='#mowing' size='small' />
-                                <Tag label='#fertilizing' size='small' />
+                                <Tag
+                                    mode='light'
+                                    label={
+                                        <div className='inline-flex items-center'>
+                                            Date: {appointment.date}
+                                        </div>
+                                    }
+                                    size='small'
+                                />
                             </div>
 
-                            <Tag
-                                mode='light'
-                                label={
-                                    <div className='inline-flex items-center'>
-                                        Status:
-                                        {appointment.status === 'DONE' ? (
-                                            <DoneIcon />
-                                        ) : (
-                                            <OngoingIcon />
-                                        )}
-                                        {appointment.status.toLocaleLowerCase()}
-                                    </div>
-                                }
-                                size='small'
-                            />
-                            <Tag
-                                mode='light'
-                                label={
-                                    <div className='inline-flex items-center'>
-                                        Date: {appointment.date}
-                                    </div>
-                                }
-                                size='small'
-                            />
-                        </div>
-
-                        <div className='flex gap-5 xs:gap-10 justify-center flex-col xs:flex-row'>
-                            <Button mode='secondary'>Book Again</Button>
-                            <Button
-                                mode='white'
-                                onClick={() => setReviewModalIsOpen(true)}
-                            >
-                                Write Review
-                            </Button>
-                        </div>
-                    </StyledAppointmentCard>
-                ))}
+                            <div className='flex gap-5 xs:gap-10 justify-center flex-col xs:flex-row'>
+                                <Button
+                                    onClick={() =>
+                                        appointmentIsDone
+                                            ? console.log('Book Again Modal')
+                                            : console.log(
+                                                  'Cancel Appointment Modal',
+                                              )
+                                    }
+                                    mode={
+                                        appointmentIsDone
+                                            ? 'secondary'
+                                            : 'danger'
+                                    }
+                                >
+                                    {appointmentIsDone
+                                        ? 'Book Again'
+                                        : 'Cancel Appointment'}
+                                </Button>
+                                <Button
+                                    mode='white'
+                                    onClick={() => setReviewModalIsOpen(true)}
+                                >
+                                    Write Review
+                                </Button>
+                            </div>
+                        </StyledAppointmentCard>
+                    );
+                })}
                 <StyledAppointmentCard></StyledAppointmentCard>
             </div>
         </Layout>
