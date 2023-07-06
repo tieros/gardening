@@ -23,7 +23,6 @@ const StyledTag = styled.div<Omit<Props, 'label'>>`
                 case 'small':
                     return css`
                         border-radius: 10px;
-                        height: 28px;
                         padding: 5px 12px;
                         font-size: 14px;
                     `;

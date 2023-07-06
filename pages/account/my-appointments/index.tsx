@@ -62,30 +62,29 @@ const MyAppointments = () => {
                 ) : null}
                 {mockData.map((appointment) => (
                     <StyledAppointmentCard key={appointment.id}>
-                        <div className='flex gap-4 items-center w-full'>
-                            <StyledImage
-                                src={appointment.gardener.profilePic}
-                                alt='gardener-profile-picture'
-                                width={50}
-                                height={50}
-                            />
-
-                            <div className='flex justify-between min-w-[226px] items-baseline w-full'>
+                        <div className='flex gap-4 w-full flex-col xs:flex-row justify-between'>
+                            <div className='flex gap-4'>
+                                <StyledImage
+                                    src={appointment.gardener.profilePic}
+                                    alt='gardener-profile-picture'
+                                    width={50}
+                                    height={50}
+                                />
                                 <div className='flex flex-col'>
                                     <h6 className='text-dark font-semibold'>
                                         {appointment.gardener.name}
                                     </h6>
                                     <StarRating rating={4.4} readOnly={true} />
                                 </div>
-                                <div className='inline-flex gap-[5px]'>
-                                    <LocationTagIcon width={16} height={23} />
-                                    {appointment.gardener.location.address}
-                                </div>
+                            </div>
+                            <div className='inline-flex gap-[5px]'>
+                                <LocationTagIcon width={16} height={23} />
+                                {appointment.gardener.location.address}
                             </div>
                         </div>
 
                         <div className='flex flex-col gap-5 p-7'>
-                            <div className='inline-flex gap-3'>
+                            <div className='inline-flex gap-3 flex-wrap'>
                                 <Tag
                                     mode='light'
                                     label='Services Requested: '
@@ -121,7 +120,7 @@ const MyAppointments = () => {
                             />
                         </div>
 
-                        <div className='flex gap-10 justify-center'>
+                        <div className='flex gap-5 xs:gap-10 justify-center flex-col xs:flex-row'>
                             <Button mode='secondary'>Book Again</Button>
                             <Button
                                 mode='white'

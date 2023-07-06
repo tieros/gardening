@@ -67,7 +67,7 @@ const Button = ({
         mode={mode}
         onClick={onClick}
         type={type}
-        className='w-[155px] md:w-[300px] h-[45px] md:h-[58px] text-base md:text-lg'
+        className='xs:w-[155px] md:w-[300px] h-[45px] md:h-[58px] text-base md:text-lg flex items-center justify-center'
     >
         {children}
     </StyledButton>
