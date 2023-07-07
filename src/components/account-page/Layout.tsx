@@ -14,10 +14,7 @@ type Props = {
 const AccountLayout = ({ children }: Props) => {
     return (
         <div className='bg-background w-full h-[100vh] lg:overflow-hidden'>
-            <Navbar
-                navElements={navElements}
-                customStyle='!justify-center !gap-10'
-            />
+            <Navbar navElements={navElements} />
             {children}
         </div>
     );

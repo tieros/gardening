@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import HamburgerMenu from '@/components/Icons/HamburgerMenuIcon';
 import CloseIcon from '@/components/Icons/CloseIcon';
+import { useRouter } from 'next/router';
 
 type Props = {
     navElements: {
@@ -22,6 +23,43 @@ const StyledNavbar = styled.nav<{ showMenu: boolean }>`
     border-radius: 30px;
     background: ${({ showMenu, theme }) =>
         showMenu ? theme.colors.background : 'none'};
+
+    .active-link {
+        position: relative;
+        display: inline-block;
+        font-weight: 500;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            border-bottom: 5px solid ${({ theme }) => theme.colors.green};
+            border-radius: 5px;
+        }
+    }
+`;
+
+const StyledLink = styled(Link)`
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0;
+        height: 5px;
+        background-image: ${({ theme }) => theme.colors.greenLinear};
+        border-radius: 15px;
+        transition: width 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
 `;
 
 const StyledNavElement = styled.li`
@@ -59,11 +97,12 @@ const MobileMenu = styled.ul<{ showMenu: boolean }>`
 `;
 const Navbar = ({ navElements, customStyle }: Props) => {
     const [showMenu, setShowMenu] = useState(false);
-
+    const router = useRouter();
+    const currentPage = router.pathname;
     return (
         <StyledNavbar
             showMenu={showMenu}
-            className={`flex w-full justify-between align-center shadow-mobileNavbar md:shadow-none ${customStyle} `}
+            className={`flex w-full justify-center gap-7 align-center shadow-mobileNavbar md:shadow-none ${customStyle} `}
         >
             {!showMenu ? (
                 <div
@@ -86,7 +125,7 @@ const Navbar = ({ navElements, customStyle }: Props) => {
                     <CloseIcon />
                 </div>
             )}
-            <Link href='/' className='customize-logo'>
+            <Link href='/'>
                 <Logo />
             </Link>
 
@@ -94,9 +133,13 @@ const Navbar = ({ navElements, customStyle }: Props) => {
                 {navElements?.map((element) => (
                     <StyledNavElement
                         key={element.label}
-                        className='text-rubik text-xl'
+                        className={`text-rubik text-xl ${
+                            currentPage === element.link ? 'active-link' : ''
+                        }`}
                     >
-                        <Link href={element.link}>{element.label}</Link>
+                        <StyledLink href={element.link}>
+                            {element.label}
+                        </StyledLink>
                     </StyledNavElement>
                 ))}
             </DesktopMenu>
@@ -106,9 +149,15 @@ const Navbar = ({ navElements, customStyle }: Props) => {
                     {navElements?.map((element) => (
                         <StyledNavElement
                             key={element.label}
-                            className='text-rubik text-2xl'
+                            className={`text-rubik text-2xl ${
+                                currentPage === element.link
+                                    ? 'active-link'
+                                    : ''
+                            }`}
                         >
-                            <Link href={element.link}>{element.label}</Link>
+                            <StyledLink href={element.link}>
+                                {element.label}
+                            </StyledLink>
                         </StyledNavElement>
                     ))}
                 </MobileMenu>

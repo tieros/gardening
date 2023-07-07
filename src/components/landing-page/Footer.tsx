@@ -8,11 +8,15 @@ import Logo from '../Icons/Logo';
 import InstagramIcon from '../Icons/InstagramIcon';
 import YoutubeIcon from '../Icons/YoutubeIcon';
 import TwitterIcon from '../Icons/TwitterIcon';
+import SendIcon from '../Icons/SendIcon';
+import Toast from '../UI/Toast';
+import { ToastContainer } from 'react-toastify';
 
 const Footer = () => {
     const [subscribeEmail, setSubscribeEmail] = useState('');
     return (
         <div className='relative'>
+            <ToastContainer />
             <Image
                 width={518}
                 height={355}
@@ -32,17 +36,30 @@ const Footer = () => {
                     <Link href='#'>Login</Link>
                 </div>
                 <div className='inline-block'>
-                    <Input
-                        value={subscribeEmail}
-                        label={
-                            <p className='my-5 lg:my-0 lg:mb-5 text-pink font-semibold text-lg'>
-                                Subscribe
-                            </p>
-                        }
-                        onChange={(event) =>
-                            setSubscribeEmail(event.target.value)
-                        }
-                    />
+                    <div className='relative'>
+                        <div
+                            className='absolute top-[70%] right-[15px] translate-y-[-30%] cursor-pointer'
+                            onClick={() =>
+                                Toast({
+                                    content: <p>Subscribed ❤️</p>,
+                                    mode: 'success',
+                                })
+                            }
+                        >
+                            <SendIcon />
+                        </div>
+                        <Input
+                            value={subscribeEmail}
+                            label={
+                                <p className='my-5 lg:my-0 lg:mb-5 text-pink font-semibold text-lg'>
+                                    Subscribe
+                                </p>
+                            }
+                            onChange={(event) =>
+                                setSubscribeEmail(event.target.value)
+                            }
+                        />
+                    </div>
                     <div className='flex gap-3 mt-7'>
                         <InstagramIcon />
                         <YoutubeIcon />

@@ -78,10 +78,7 @@ const LoginPage = () => {
             isLoginPage={isLoginPage}
             className='bg-background w-full h-[100vh] relative'
         >
-            <Navbar
-                navElements={navElements}
-                customStyle='md:!absolute !justify-around'
-            />
+            <Navbar navElements={navElements} customStyle='md:!absolute' />
             <div className='flex justify-center 2xl:justify-between items-center bg-background'>
                 {isLoginPage ? (
                     <StyledForm
