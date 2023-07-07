@@ -29,7 +29,7 @@ const StyledNavElement = styled.li`
 `;
 
 const DesktopMenu = styled.ul`
-    background: rgba(241, 241, 237, 0.24);
+    background: rgba(241, 241, 237, 0.74);
     border: 1px solid rgba(221, 221, 221, 0.53);
     box-shadow: ${({ theme }) => theme.boxShadows.navbar};
     backdrop-filter: blur(5px);

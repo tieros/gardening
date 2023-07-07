@@ -15,7 +15,7 @@ export const customtheme = {
             'linear-gradient(131.19deg, #DCE7D3 13.41%, #C2D070 58.11%, #647B52 89.58%)',
     },
     boxShadows: {
-        navbar: '-20px -20px 20px rgba(255, 255, 255, 0.38), 20px 20px 20px rgba(224, 224, 215, 0.45);',
+        navbar: '0px 0px 0px 0px rgba(123, 107, 107, 0.10), 0px 5px 11px 0px rgba(123, 107, 107, 0.10), 0px 20px 20px 0px rgba(123, 107, 107, 0.09), 0px 46px 28px 0px rgba(123, 107, 107, 0.05), 0px 82px 33px 0px rgba(123, 107, 107, 0.01), 0px 127px 36px 0px rgba(123, 107, 107, 0.00), 0px 4px 4px 0px rgba(84, 68, 63, 0.35)',
         mobileNavbar: 'inset 0px -2px 0px #ebefe6, inset 0px 2px 3px #dbddcb',
         input: 'inset 8px 8px 8px rgba(0, 0, 0, 0.09), inset -8px -8px 8px #F7F7F0;',
         inputError: 'inset 2px 4px 8px #DC575C, inset -8px -8px 8px #F7F7F0;',

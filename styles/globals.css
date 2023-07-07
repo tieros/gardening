@@ -114,3 +114,15 @@ h6 {
 ::-ms-scrollbar-thumb:hover {
     background-color: #c9ccaa;
 }
+
+:root {
+    --toastify-color-info: #fa9094 !important;
+    --toastify-color-success: #aadc6a !important;
+    --toastify-color-warning: #f2e35d !important;
+    --toastify-color-error: #dc575c !important;
+}
+
+.Toastify__toast {
+    border-radius: 15px !important;
+    background-color: #fbfff6 !important;
+}

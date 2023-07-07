@@ -3,7 +3,9 @@ import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import Layout from '@/components/account-page/Layout';
 import { useState } from 'react';
+import Toast from '../../../src/components/UI/Toast';
 import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 
 const StyledCardContainer = styled.div`
     background: linear-gradient(
@@ -44,63 +46,77 @@ const Profile = () => {
             <div className='p-10 flex justify-center items-center'>
                 <StyledCardContainer>
                     <h4 className='text-dark'>Profile</h4>
-                    <div className='inline-flex items-end'>
-                        <Input
-                            value={userInfo.name}
-                            onChange={(event) =>
-                                setUserInfo({
-                                    ...userInfo,
-                                    name: event.target.value,
-                                })
-                            }
-                            label='Name'
-                            disabled={!isEditMode}
-                        />
-                        {isEditMode ? <EditIcon /> : null}
+                    <div className='flex gap-7'>
+                        <div className='inline-flex items-end'>
+                            <Input
+                                value={userInfo.name}
+                                onChange={(event) =>
+                                    setUserInfo({
+                                        ...userInfo,
+                                        name: event.target.value,
+                                    })
+                                }
+                                label='Name'
+                                disabled={!isEditMode}
+                            />
+                            {isEditMode ? <EditIcon /> : null}
+                        </div>
+                        <div className='inline-flex items-end'>
+                            <Input
+                                value={userInfo.surname}
+                                onChange={(event) =>
+                                    setUserInfo({
+                                        ...userInfo,
+                                        surname: event.target.value,
+                                    })
+                                }
+                                label='Surname'
+                                disabled={!isEditMode}
+                            />
+                            {isEditMode ? <EditIcon /> : null}
+                        </div>
                     </div>
-                    <div className='inline-flex items-end'>
-                        <Input
-                            value={userInfo.surname}
-                            onChange={(event) =>
-                                setUserInfo({
-                                    ...userInfo,
-                                    surname: event.target.value,
-                                })
-                            }
-                            label='Surname'
-                            disabled={!isEditMode}
-                        />
-                        {isEditMode ? <EditIcon /> : null}
-                    </div>
-                    <div className='inline-flex items-end'>
-                        <Input
-                            value={userInfo.email}
-                            onChange={() =>
-                                console.log('you cannot change email')
-                            }
-                            label='Email'
-                            disabled={true}
-                        />
-                        {isEditMode ? (
-                            <EditIcon className='opacity-20' />
-                        ) : null}
-                    </div>
-                    <div className='inline-flex items-end'>
-                        <Input
-                            value={userInfo.password}
-                            onChange={() =>
-                                console.log('you cannot change email')
-                            }
-                            type='password'
-                            label='Password'
-                            disabled={!isEditMode}
-                        />
-                        {isEditMode ? <EditIcon /> : null}
+                    <div className='flex gap-7'>
+                        <div className='inline-flex items-end'>
+                            <Input
+                                value={userInfo.email}
+                                onChange={() =>
+                                    console.log('you cannot change email')
+                                }
+                                label='Email'
+                                disabled={true}
+                            />
+                            {isEditMode ? (
+                                <EditIcon className='opacity-20' />
+                            ) : null}
+                        </div>
+                        <div className='inline-flex items-end'>
+                            <Input
+                                value={userInfo.password}
+                                onChange={() =>
+                                    console.log('you cannot change email')
+                                }
+                                type='password'
+                                label='Password'
+                                disabled={!isEditMode}
+                            />
+                            {isEditMode ? <EditIcon /> : null}
+                        </div>
                     </div>
                     {isEditMode ? (
-                        <Button onClick={() => setIsEditMode(false)}>
-                            Save Changes
-                        </Button>
+                        <>
+                            <Button
+                                onClick={() => {
+                                    Toast({
+                                        content: <p>Hebe</p>,
+                                        mode: 'success',
+                                    });
+                                }}
+                            >
+                                Save Changes
+                            </Button>
+                            <ToastContainer />
+                        </>
                     ) : (
                         <Button
                             onClick={() => setIsEditMode(true)}
