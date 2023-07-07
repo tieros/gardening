@@ -63,7 +63,7 @@ const Navbar = ({ navElements, customStyle }: Props) => {
     return (
         <StyledNavbar
             showMenu={showMenu}
-            className={`${customStyle} flex w-full justify-between align-center shadow-mobileNavbar md:shadow-none`}
+            className={`flex w-full justify-between align-center shadow-mobileNavbar md:shadow-none ${customStyle} `}
         >
             {!showMenu ? (
                 <div
@@ -86,7 +86,7 @@ const Navbar = ({ navElements, customStyle }: Props) => {
                     <CloseIcon />
                 </div>
             )}
-            <Link href='/'>
+            <Link href='/' className='customize-logo'>
                 <Logo />
             </Link>
 

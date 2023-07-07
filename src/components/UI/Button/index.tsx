@@ -5,6 +5,7 @@ type Props = {
     mode?: 'primary' | 'secondary' | 'white' | 'danger';
     children: React.ReactNode;
     type?: 'button' | 'submit' | 'reset';
+    disabled?: boolean;
 };
 
 const StyledButton = styled.button<Props>`
@@ -13,6 +14,10 @@ const StyledButton = styled.button<Props>`
         padding: 10px 20px;
         box-shadow: ${theme.boxShadows.button};
         font-weight: 500;
+
+        :disabled {
+            cursor: not-allowed;
+        }
 
         ${() => {
             switch (mode) {
@@ -62,11 +67,13 @@ const Button = ({
     mode = 'primary',
     children,
     type = 'button',
+    disabled,
 }: Props) => (
     <StyledButton
         mode={mode}
         onClick={onClick}
         type={type}
+        disabled={disabled}
         className='xs:w-[155px] md:w-[300px] h-[45px] md:h-[58px] text-base md:text-lg flex items-center justify-center'
     >
         {children}

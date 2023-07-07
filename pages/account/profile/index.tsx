@@ -6,6 +6,15 @@ import { useState } from 'react';
 import Toast from '../../../src/components/UI/Toast';
 import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
+import OnePlant from '../../../src/assets/oneplant.png';
+
+const StyledContainer = styled.div`
+    background: url(${OnePlant.src});
+    background-repeat: no-repeat;
+    background-position: left -40% bottom;
+    height: calc(100vh - 110px);
+    background-size: 60%;
+`;
 
 const StyledCardContainer = styled.div`
     background: linear-gradient(
@@ -16,14 +25,27 @@ const StyledCardContainer = styled.div`
         rgba(135, 146, 73, 0.2) 89.58%
     );
     border: 1px solid #fcfcfc;
+    backdrop-filter: blur(5px);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
         inset -2px -2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
-    padding: 4rem 10rem;
-    gap: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: min-content;
+
+    .edit-icon-wrapper {
+        width: 30px;
+        svg {
+            position: absolute;
+            top: 50%;
+            right: 0;
+        }
+    }
+
+    button {
+        margin-top: 30px;
+    }
 `;
 
 type UserInfo = {
@@ -43,11 +65,12 @@ const Profile = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     return (
         <Layout>
-            <div className='p-10 flex justify-center items-center'>
-                <StyledCardContainer>
+            <ToastContainer />
+            <StyledContainer className='p-10 flex justify-center w-full h-full'>
+                <StyledCardContainer className='gap-7 lg:gap-50px p-8 lg:p-14'>
                     <h4 className='text-dark'>Profile</h4>
-                    <div className='flex gap-7'>
-                        <div className='inline-flex items-end'>
+                    <div className='flex gap-7 flex-col lg:flex-row'>
+                        <div className='inline-flex items-end relative'>
                             <Input
                                 value={userInfo.name}
                                 onChange={(event) =>
@@ -59,9 +82,13 @@ const Profile = () => {
                                 label='Name'
                                 disabled={!isEditMode}
                             />
-                            {isEditMode ? <EditIcon /> : null}
+                            {isEditMode ? (
+                                <div className='edit-icon-wrapper'>
+                                    <EditIcon />
+                                </div>
+                            ) : null}
                         </div>
-                        <div className='inline-flex items-end'>
+                        <div className='inline-flex items-end relative'>
                             <Input
                                 value={userInfo.surname}
                                 onChange={(event) =>
@@ -73,11 +100,15 @@ const Profile = () => {
                                 label='Surname'
                                 disabled={!isEditMode}
                             />
-                            {isEditMode ? <EditIcon /> : null}
+                            {isEditMode ? (
+                                <div className='edit-icon-wrapper'>
+                                    <EditIcon />
+                                </div>
+                            ) : null}
                         </div>
                     </div>
-                    <div className='flex gap-7'>
-                        <div className='inline-flex items-end'>
+                    <div className='flex gap-7 flex-col lg:flex-row'>
+                        <div className='inline-flex items-end relative'>
                             <Input
                                 value={userInfo.email}
                                 onChange={() =>
@@ -87,10 +118,12 @@ const Profile = () => {
                                 disabled={true}
                             />
                             {isEditMode ? (
-                                <EditIcon className='opacity-20' />
+                                <div className='edit-icon-wrapper'>
+                                    <EditIcon className='opacity-20' />
+                                </div>
                             ) : null}
                         </div>
-                        <div className='inline-flex items-end'>
+                        <div className='inline-flex items-end relative'>
                             <Input
                                 value={userInfo.password}
                                 onChange={() =>
@@ -100,23 +133,25 @@ const Profile = () => {
                                 label='Password'
                                 disabled={!isEditMode}
                             />
-                            {isEditMode ? <EditIcon /> : null}
+                            {isEditMode ? (
+                                <div className='edit-icon-wrapper'>
+                                    <EditIcon />
+                                </div>
+                            ) : null}
                         </div>
                     </div>
                     {isEditMode ? (
-                        <>
-                            <Button
-                                onClick={() => {
-                                    Toast({
-                                        content: <p>Hebe</p>,
-                                        mode: 'success',
-                                    });
-                                }}
-                            >
-                                Save Changes
-                            </Button>
-                            <ToastContainer />
-                        </>
+                        <Button
+                            onClick={() => {
+                                Toast({
+                                    content: <p>Successfully changed!</p>,
+                                    mode: 'success',
+                                });
+                                setTimeout(() => setIsEditMode(false), 1000);
+                            }}
+                        >
+                            Save Changes
+                        </Button>
                     ) : (
                         <Button
                             onClick={() => setIsEditMode(true)}
@@ -126,7 +161,7 @@ const Profile = () => {
                         </Button>
                     )}
                 </StyledCardContainer>
-            </div>
+            </StyledContainer>
         </Layout>
     );
 };

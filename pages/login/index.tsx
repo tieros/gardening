@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import PlantImage from '../../src/assets/card-bg.jpg';
 import SignUp from './SignUp';
 import { validateEmail } from '@/utils/validation';
-import OnePlantImage from '../../src/assets/oneplant.png';
+import OnePlantImage from '../../src/assets/oneplantsmall.png';
 import Image from 'next/image';
 import MobilePlantImage from '../../src/assets/heroImage.png';
 import { useMutation } from '@apollo/client';

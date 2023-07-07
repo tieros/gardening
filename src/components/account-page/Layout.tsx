@@ -10,10 +10,14 @@ const navElements = [
 type Props = {
     children: React.ReactNode;
 };
+
 const AccountLayout = ({ children }: Props) => {
     return (
-        <div className='bg-background w-[100vw] h-[100vh]'>
-            <Navbar navElements={navElements} />
+        <div className='bg-background w-full h-[100vh] lg:overflow-hidden'>
+            <Navbar
+                navElements={navElements}
+                customStyle='!justify-center !gap-10'
+            />
             {children}
         </div>
     );

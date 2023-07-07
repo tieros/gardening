@@ -2,7 +2,7 @@ import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import { useState } from 'react';
 import { validateEmail, validatePassword } from '@/utils/validation';
-import OnePlantImage from '../../src/assets/oneplant.png';
+import OnePlantImage from '../../src/assets/oneplantsmall.png';
 import Image from 'next/image';
 
 type Props = {

@@ -145,9 +145,11 @@ const MyAppointments = () => {
                                         ? 'Book Again'
                                         : 'Cancel Appointment'}
                                 </Button>
+
                                 <Button
                                     mode='white'
                                     onClick={() => setReviewModalIsOpen(true)}
+                                    disabled={!appointmentIsDone}
                                 >
                                     Write Review
                                 </Button>
